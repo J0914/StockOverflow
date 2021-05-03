@@ -1,0 +1,21 @@
+Users pw Abc123!
+{userName: 'Andrew.L', email: 'andrew@isAwesome.com', hashedPassword: '$2a$10$c1s4qxp/LYwOcpP/rZYyaOYQo0YKKAecUR09ZcYJZ.KcnybDWUTku', createdAt: new Date(), updatedAt: new Date() },
+{userName: 'Vic.T', email: 'vic@isdabest.com', hashedPassword: '$2a$10$c1s4qxp/LYwOcpP/rZYyaOYQo0YKKAecUR09ZcYJZ.KcnybDWUTku', createdAt: new Date(), updatedAt: new Date() },
+{userName: 'Jimson.M', email: 'Jimson@theAllKnowing.com', hashedPassword: '$2a$10$c1s4qxp/LYwOcpP/rZYyaOYQo0YKKAecUR09ZcYJZ.KcnybDWUTku', createdAt: new Date(), updatedAt: new Date() },
+{userName: 'Jordyn.S, email: 'Jordyn@alright.com', hashedPassword: '$2a$10$c1s4qxp/LYwOcpP/rZYyaOYQo0YKKAecUR09ZcYJZ.KcnybDWUTku', createdAt: new Date(), updatedAt: new Date() }
+
+Questions
+{authorId: 1, questionsText: 'What the heck is crypto?', createdAt: new Date(), updatedAt: new Date()},
+{authorId: 2, questionsText: 'Who doesn't love blockChains??', createdAt: new Date(), updatedAt: new Date()},
+{authorId: 3, questionsText: 'How do I make my own cryptocurrency?', createdAt: new Date(), updatedAt: new Date()},
+{authorId: 4, questionsText: 'How do I even get started learning about crypto?', createdAt: new Date(), updatedAt: new Date()}
+
+Responses
+{questionId: 1, userId: 2, responseText: 'How do you not know what crypto is?', createdAt: new Date(), updatedAt: new Date()},
+{questionId: 2, userId: 3, responseText: 'amirite lol', createdAt: new Date(), updatedAt: new Date()},
+{questionId: 3, userId: 4, responseText: 'you just code it, easyyyyy', createdAt: new Date(), updatedAt: new Date()},
+{questionId: 4, userId: 1, responseText: 'uhh.. ask Elon.', createdAt: new Date(), updatedAt: new Date()},
+
+Tags
+{name: crypto, createdAt: new Date(), updatedAt: new Date()},
+{name: blockChain, createdAt: new Date(), updatedAt: new Date()}
