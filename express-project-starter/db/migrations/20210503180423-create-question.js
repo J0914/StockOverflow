@@ -14,7 +14,10 @@ module.exports = {
         references: {model: 'Users'}
       },
       tagIds: {
-        type: Sequelize.ARRAY,
+        type: Sequelize.ARRAY({
+          type: Sequelize.INTEGER,
+          references: {model: "Tags"}
+        })
       },
       questionText: {
         type: Sequelize.TEXT
