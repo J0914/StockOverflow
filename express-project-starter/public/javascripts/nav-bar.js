@@ -1,15 +1,17 @@
 document.addEventListener("DOMContentLoaded", ()=> {
     const searchIcon = document.querySelector("#search-icon");
     const searchBar = document.querySelector(".search-bar");
-    const clicked = false;
+    let clicked = false;
 
 
     searchIcon.addEventListener("click", (event) => {
         if (clicked) {
-            searchBar.setAttribute("visibility", "hidden");
+            console.log("clicked true")
+            searchBar.style.visibility = "hidden";
             clicked = false;
         } else {
-            searchBar.setAttribute("visibility", "visible");
+            console.log("clicked false")
+            searchBar.style.visibility = "visible";
             clicked = true;
         }
     })
