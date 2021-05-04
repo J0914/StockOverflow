@@ -1,12 +1,6 @@
 include layout.pug
 
 block content
-    if errors
-        div(class='alert alert-danger' role='alert')
-            p The following error(s) occurred:
-            ul
-                each error in errors
-                    li= error
     div 
         //- img(src='../')
     div(class='login-div')
@@ -14,11 +8,18 @@ block content
             input(type='hidden' name='_csrf' value=csrfToken)
             div
                 label(class='labels') Username or Email:
-                input(type='text' name='userName' class="search-bar-field login-field" userName)
+                input(type='text' name='userName' class="login-field" userName)
             div
                 label(class='labels') Password:
-                input(type='password' name='password' class="search-bar-field login-field" password)
+                input(type='password' name='password' class="login-field" password)
+            div(class='errors-div')
+                if errors
+                    div(class='alert alert-danger' role='alert')
+                        p The following error(s) occurred:
+                        ul
+                            each error in errors
+                                li= error
             div
-                button(type='submit' class="blue-button login-field login-button") Log In
+                button(type='submit' class="blue-button login-button") Log In
             div 
                 p: a(href='/user/signup' class='labels') Don't Have An Account?
