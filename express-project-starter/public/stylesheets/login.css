@@ -10,8 +10,10 @@
 
 .login-div {
     display: flex;
+    flex-direction: column;
     position: static;
     justify-content: center;
+    align-items: center;
     margin: 30%;
 }
 
@@ -30,14 +32,23 @@
 
 .login-button {
     margin: 30px 0px;
-    width: 100%;
+    width: 100% !important;
 }
 
 .labels {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.errors-div {
-    font-size: 1pt;
-    color: pink;
+.alert-danger {
+    font-size: xx-small;
+    color: red;
+}
+
+.li-margin-class {
+    margin: 0 0 0 30px;
+}
+
+.logo-login {
+    height: 2.5rem;
+    width: 2.5rem;
 }

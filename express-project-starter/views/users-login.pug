@@ -1,9 +1,9 @@
 include layout.pug
 
 block content
-    div 
-        //- img(src='../')
     div(class='login-div')
+        div
+            img(src="/logo3.png" class="logo-login") 
         form(action='/users/login' class='login-form' method='post')
             input(type='hidden' name='_csrf' value=csrfToken)
             div
@@ -18,7 +18,7 @@ block content
                         p The following error(s) occurred:
                         ul
                             each error in errors
-                                li= error
+                                li(class="alert-danger li-margin-class")= error
             div
                 button(type='submit' class="blue-button login-button") Log In
             div 
