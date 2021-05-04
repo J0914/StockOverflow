@@ -10,18 +10,34 @@
 
 .login-div {
     display: flex;
+    position: static;
     justify-content: center;
+    margin: 30%;
 }
 
 
 .login-field {
     margin: 10px 0 10px 0;
+    border-color: #bbc0c4;
+    background-color: white;
+    box-shadow: none;
+    color: #3c4146;
+    border-radius: 3px;
+    padding: .6em .7em;
+    border: 1px solid #bbc0c4;
+    width: 100%;
 }
 
 .login-button {
+    margin: 30px 0px;
     width: 100%;
 }
 
 .labels {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.errors-div {
+    font-size: 1pt;
+    color: pink;
 }
