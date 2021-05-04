@@ -7,16 +7,18 @@ block content
             ul
                 each error in errors
                     li= error
+    div 
+        //- img(src='../')
     div(class='login-div')
         form(action='/users/login' class='login-form' method='post')
             input(type='hidden' name='_csrf' value=csrfToken)
             div
-                label Username or Email:
-                input(type='text' name='userName' class="search-bar-field" userName)
+                label(class='labels') Username or Email:
+                input(type='text' name='userName' class="search-bar-field login-field" userName)
             div
-                label Password:
-                input(type='password' name='password' class="search-bar-field" password)
+                label(class='labels') Password:
+                input(type='password' name='password' class="search-bar-field login-field" password)
             div
-                button(type='submit' class="blue-button") Log In
+                button(type='submit' class="blue-button login-field login-button") Log In
             div 
-                p: a(href='/user/signup') Don't Have An Account?
+                p: a(href='/user/signup' class='labels') Don't Have An Account?

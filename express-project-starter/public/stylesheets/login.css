@@ -2,8 +2,6 @@
     box-sizing: border-box;
     border: 1px solid transparent;
     box-shadow: 0 10px 25px rgb(0 0 0 / 5%);
-    /* 0 1px 4px rgb(0 0 0 / 10%);
-    , 0 20px 48px rgb(0 0 0 / 5%),  */
     background-color:white;
     margin: 10px;
     padding: 20px;
@@ -13,8 +11,17 @@
 .login-div {
     display: flex;
     justify-content: center;
-
 }
-body {
-    background-color: var(--black-100);
+
+
+.login-field {
+    margin: 10px 0 10px 0;
+}
+
+.login-button {
+    width: 100%;
+}
+
+.labels {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
