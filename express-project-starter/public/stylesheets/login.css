@@ -1,0 +1,27 @@
+.login-form {
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    box-shadow: 0 10px 25px rgb(0 0 0 / 5%);
+    background-color:white;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 7px
+}
+
+.login-div {
+    display: flex;
+    justify-content: center;
+}
+
+
+.login-field {
+    margin: 10px 0 10px 0;
+}
+
+.login-button {
+    width: 100%;
+}
+
+.labels {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
