@@ -1,0 +1,45 @@
+.body-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    padding-top: 55px;
+    grid-auto-flow: column;
+}
+
+.left-navbar {
+    border-right: 1px solid rgb(0, 0, 0);
+    height: 100vh;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.left-nav-links, .left-nav-public{
+    list-style: none;
+    background-color: green;
+    width: 50%;
+}
+
+.left-navbar-li {
+    font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
+    text-decoration: none;
+    background-color: pink;
+    padding-bottom: 10px;    
+}
+
+.hoverable:hover {
+    background-color: blue;
+    border-right: 3px solid #f48024;
+}
+
+.li-link {
+    padding-left: 10px;
+}
+
+.left-nav-public {
+    width: 100%;
+}
+
+
+
+
+
