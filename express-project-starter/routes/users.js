@@ -35,7 +35,7 @@ const userValidators = [
     .custom((value => {
       return db.User.findOne({
         where: {
-          emailAddress: value
+          email: value
         }
       })
         .then((user) => {
