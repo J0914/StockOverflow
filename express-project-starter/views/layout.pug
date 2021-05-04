@@ -3,15 +3,19 @@ html
   head
       block head
         title="Express Starter App"
+        <link rel="icon" type="image/png" href="/favicon.png">
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel='stylesheet' href='/stylesheets/nav-bar.css')
+        script(type="text/javascript" src="./events/nav-bar.js")
         link(rel='stylesheet' href='/stylesheets/login.css')
   body
     .header-nav
       .logo-container
         a(href="/")
-          img(class="logo" src="/logo2.png")
+          img(class="logo-sm" src="/logo3.png")
+          img(class="logo" src="/logo2.svg")
       .search-bar
+          button(id="search-icon") 🔎
           input(class="search-bar-field" placeholder="Search..." name="q" type="text")
       .right-buttons
           a(id="login-button" href="/users/login" class="light-blue-button") Log In

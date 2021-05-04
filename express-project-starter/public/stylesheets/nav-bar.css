@@ -9,6 +9,8 @@
     display: grid;
     grid-template-columns: 25% 50% 25%;
     margin-bottom: 10px;
+    position: fixed;
+    top: 0;
   }
 
 .logo-container {
@@ -18,9 +20,21 @@
     margin-right: 40px;
 }
 img.logo {
-    margin-bottom: 10px;
     height: 40px;
 }
+
+img.logo-sm {
+    visibility: hidden;
+    height: 0px;
+    width: 0px;
+}
+
+#search-icon {
+    visibility: hidden;
+    width: 0px;
+    height: 0px;
+}
+
   .search-bar {
     box-sizing: border-box;
     display: inline-block;
@@ -36,7 +50,7 @@ img.logo {
     border-radius: 3px;
     padding: .6em .7em;
     border: 1px solid #bbc0c4;
-    width: 100%;
+    width: 80%;
   }
 
   .right-buttons {
@@ -44,6 +58,7 @@ img.logo {
     justify-content: flex-start;
     align-items: center;
     margin-left: 40px;
+    padding-top: 7px;
   }
 
   .light-blue-button {
@@ -90,15 +105,38 @@ img.logo {
 /* 640 logo text and left sidebar cutoff */
 
 @media screen and (max-width: 640px) {
-
+    img.logo-sm {
+        visibility: visible;
+        height: 40px;
+        width: auto;
+    }
+    img.logo {
+        visibility: hidden;
+        height: 0px;
+        width: 0px;
+    }
 }
 
-
+/* searchbar cutoff */
 @media screen and (max-width: 816px) {
     .search-bar {
         box-sizing: border-box;
-        display: hidden;
-        padding-top: 7px;
+        visibility: hidden;
+        padding-top: 50px;
         width: 100%;
+        position: relative;
+    }
+    #search-icon {
+        visibility: visible;
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        top: 10px;
+        right: 0px;
+    }
+
+    .right-buttons {
+        height: 50px;
+        padding-top: 10px;
     }
 }
