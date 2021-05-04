@@ -1,25 +1,28 @@
 include layout.pug
 
 block content
-    if errors
-        div(class='alert alert-danger' role='alert')
-            p The following error(s) occurred:
-            ul
-                each error in errors
-                    li= error
-    form(action='/users/signup' method='post')
-        input(type='hidden' name='_csrf' value=csrfToken)
-        div
-            label Username:
-            input(type='text' name='userName' value=user.userName placeholder='YungCitrus')
-        div
-            label Email:
-            input(type='email' name='email' value=user.email placeholder='Justin@Nguyen.com')
-        div
-            label Password:
-            input(type='password' name='password' value=user.password placeholder='abc123ABC!')
-        div
-            label Confirm Password:
-            input(type='password' name='confirmPassword' value=user.password placeholder='abc123ABC!')
-        div
-            button(type='submit') Submit
+    div(class='login-div')
+        img(src="/logo3.png" class="logo-login") 
+        form(action='/users/signup' class='login-form' method='post')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            div
+                label(class='labels') Username:
+                input(type='text' name='userName' class="login-field" value=user.userName placeholder='YungCitrus')
+            div
+                label(class='labels') Email:
+                input(type='email' name='email' class="login-field" value=user.email placeholder='Justin@Nguyen.com')
+            div
+                label(class='labels') Password:
+                input(type='password' name='password' class="login-field" value=user.password placeholder='abc123ABC!')
+            div
+                label(class='labels') Confirm Password:
+                input(type='password' name='confirmPassword' class="login-field" value=user.password placeholder='abc123ABC!')
+            div
+                if errors
+                    div(class='alert alert-danger' role='alert')
+                        p The following error(s) occurred:
+                        ul
+                            each error in errors
+                                li(class='alert-danger li-margin-class')= error
+            div
+                button(type='submit' class="blue-button login-button") Submit
