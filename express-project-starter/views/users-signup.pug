@@ -1,6 +1,12 @@
-include layout.pug 
+include layout.pug
 
-block content 
+block content
+    if errors
+        div(class='alert alert-danger' role='alert')
+            p The following error(s) occurred:
+            ul
+                each error in errors
+                    li= error
     form(action='/users/signup' method='post')
         input(type='hidden' name='_csrf' value=csrfToken)
         div
@@ -9,7 +15,7 @@ block content
         div
             label Email:
             input(type='email' name='email' value=user.email placeholder='Justin@Nguyen.com')
-        div 
+        div
             label Password:
             input(type='password' name='password' value=user.password placeholder='abc123ABC!')
         div
