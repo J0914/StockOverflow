@@ -8,6 +8,8 @@ html
         link(rel='stylesheet' href='/stylesheets/nav-bar.css')
         script(type="text/javascript" src="/javascripts/nav-bar.js")
         link(rel='stylesheet' href='/stylesheets/login.css')
+        link(rel='stylesheet' href='/stylesheets/left-nav-bar.css')
+
   body
     .header-nav
       .logo-container
@@ -20,4 +22,15 @@ html
       .right-buttons
           a(id="login-button" href="/users/login" class="light-blue-button") Log In
           a(id="signup-button" href="/users/signup" class="blue-button") Sign Up
-    block content
+    .body-container
+      .left-navbar
+        ol(class='left-nav-links')
+          li(class='left-navbar-li hoverable')
+            a(class='li-link' href='/') Home
+          li(class='left-navbar-li') PUBLIC
+            ol(class='left-nav-public')
+              li(class='left-navbar-li hoverable')
+                a(class='li-link' href='/questions') Questions
+
+      .body-content
+        block content
