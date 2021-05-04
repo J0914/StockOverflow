@@ -1,0 +1,21 @@
+include layout.pug
+
+block content
+    if errors
+        div(class='alert alert-danger' role='alert')
+            p The following error(s) occurred:
+            ul
+                each error in errors
+                    li= error
+    form(action='/users/login' method='post')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        div
+            label Username or Email:
+            input(type='text' name='userName' userName)
+        div
+            label Password:
+            input(type='password' name='password' password)
+        div
+            button(type='submit') Log In
+        div 
+            p: a(href='/user/signup') Don't Have An Account?
