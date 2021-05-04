@@ -4,5 +4,15 @@ html
       block head
         title="Express Starter App"
         link(rel='stylesheet' href='/stylesheets/reset.css')
+        link(rel='stylesheet' href='/stylesheets/nav-bar.css')
   body
+    .header-nav
+      .logo-container
+        a(href="/")
+          img(class="logo" src="/logo2.png")
+      .search-bar
+          input(class="search-bar-field" placeholder="Search..." name="q" type="text")
+      .right-buttons
+          a(id="login-button" href="/users/login" class="light-blue-button") Log In
+          a(id="signup-button" href="/users/signup" class="blue-button") Sign Up
     block content
