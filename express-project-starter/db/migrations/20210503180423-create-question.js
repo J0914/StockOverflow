@@ -13,7 +13,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {model: 'Users'}
       },
+      questionTitle: {
+        allowNull: false,
+        type: Sequelize.STRING(100)
+      },
       questionText: {
+        allowNull: false,
         type: Sequelize.TEXT
       },
       createdAt: {
