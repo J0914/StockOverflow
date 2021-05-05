@@ -3,7 +3,7 @@ extends layout
 block content
     div(class='login-div')
         div
-            img(src="/logo3.png" class="logo-login") 
+            img(src="/logo3.png" class="logo-login")
         form(action='/users/login' class='login-form' method='post')
             input(type='hidden' name='_csrf' value=csrfToken)
             div
@@ -21,5 +21,5 @@ block content
                                 li(class="alert-danger li-margin-class")= error
             div
                 button(type='submit' class="blue-button login-button") Log In
-            div 
-                p: a(href='/user/signup' class='labels') Don't Have An Account?
+            div
+                p: a(href='/users/signup' class='labels') Don't Have An Account?
