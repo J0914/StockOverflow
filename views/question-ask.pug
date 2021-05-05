@@ -9,6 +9,13 @@ block content
                 button(class='ask-question-guidelines-dropdown-button')
                     span(class='ask-question-guidelines-dropdown-button-text') Step 1: Draft your question
                     span(class='ask-question-guidelines-dropdown-button-symbol down-symbol') ▼
+            div(class="errors-container")
+                if errors
+                    div(class='alert alert-danger' role='alert')
+                        p The following error(s) occurred:
+                        ul
+                            each error in errors
+                                li(class='alert-danger li-margin-class')= error
 
         form(action='/questions/ask' class='ask-question-form' method='post')
             input(type='hidden' name='_csrf' value=csrfToken)
@@ -39,5 +46,8 @@ block content
                     div
                         input(type="checkbox" id="mutual-funds-tag" name="tags" value="mutualFunds")
                         label(for="mutual-funds-tag") mutual funds
+                    div
+                        input(type="checkbox" id="other-tag" name="tags" value="other")
+                        label(for="other-tag") other
             div(class="submit-button-container")
                 button(type=submit class="blue-button question-ask-submit") Submit your question
