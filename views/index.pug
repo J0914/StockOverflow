@@ -9,7 +9,10 @@ append head
 block content
     div(class='h1')
         h1= title
-            a(class='ask-question-btn' href='/questions/ask') Ask Question
+            if locals.authenticated
+                a(class='blue-button' href='/questions/ask') Ask Question
+            else
+                a(class='blue-button' href='/users/login') Ask Question
     div(id='questions')
         each question in questions
             div(class='question-summary')
