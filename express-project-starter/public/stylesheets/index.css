@@ -1,3 +1,45 @@
 h1 {
     color: #555555;
 }
+
+.stats-container, .summary {
+    display: inline-block;
+}
+
+.stats-container{
+    height: 100%;
+}
+
+.vote-div, .responses-div {
+    display: inline-block;
+    height: 50px;
+    width: 60px;
+}
+
+.labels {
+    font-size: 12px;
+}
+
+.votes, .responses, .labels{
+    display: flex;
+    justify-content: center;    
+}
+
+.question-summary {
+    box-sizing: border-box;
+    padding-left: 8px;
+    width: 100%;
+    border: 2px solid black;
+    padding: 2px;
+    margin: 1px;
+}
+
+.summary {
+    border-left: 1px solid black;
+    height: 100%;
+}
+
+.votes>a, .responses>a {
+    text-decoration: none;
+}
+

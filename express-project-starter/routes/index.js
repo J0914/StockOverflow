@@ -11,24 +11,18 @@ router.get('/', asyncHandler(async(req, res, next) => {
       as: 'User'  
   }, { 
       model: db.QuestionVote, 
-      as: 'QuestionVotes' 
+      as: 'QuestionVotes',
   }, {
       model: db.Response, 
       as: 'Responses'
   }] 
   })
-  console.log(questions.toJson())
+  console.log(questions[0].QuestionVotes[0].score)
 
   let score;
 
-  if (questions.QuestionVotes.score) {
-    score = questions.QuestionVotes.score;
-  } else {
-    score = 0;
-  }
-
   res.render('index', { 
-    title: 'Welcome to Stock Overflow', 
+    title: 'Top Questions', 
     questions,
     score
   });
