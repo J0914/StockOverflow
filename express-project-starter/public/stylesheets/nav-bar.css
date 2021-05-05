@@ -141,3 +141,9 @@ img.logo-sm {
         padding-top: 10px;
     }
 }
+
+.settings-img {
+    height: 36px;
+    width: 36px;
+    margin-bottom: 15px;
+}
