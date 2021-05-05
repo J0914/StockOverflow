@@ -19,7 +19,13 @@ html
       .search-bar
           button(id="search-icon") 🔎
           input(class="search-bar-field" placeholder="Search..." name="q" type="text")
-      .right-buttons
+      if locals.authenticated
+        .right-buttons
+          form(action='/users/logout' method='post')
+            button(class='light-blue-button' type='submit') Logout
+          img(src='/settings.png' href="/users/settings")
+      else
+        .right-buttons
           a(id="login-button" href="/users/login" class="light-blue-button") Log In
           a(id="signup-button" href="/users/signup" class="blue-button") Sign Up
     .body-container
