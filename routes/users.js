@@ -59,6 +59,21 @@ const userValidators = [
     .withMessage('Please make sure passwords match'),
 ];
 
+const passwordValidators = [
+  check('password')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Password')
+    .isLength({ max: 50 })
+    .withMessage('Password must not be more than 50 characters long')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
+    .withMessage('Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")'),
+  check('confirmPassword')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Confirm Password')
+    .custom((value, { req }) => value === req.body.password)
+    .withMessage('Please make sure passwords match'),
+  ];
+
 router.post('/signup', csrfProtection, userValidators, asyncHandler(async (req, res, next) => {
   const { userName, email, password } = req.body
 
@@ -142,23 +157,45 @@ router.post('/logout', (req, res) => {
   res.redirect('/');
 })
 
-// router.get('/settings', csrfProtection, (req, res) => { 
-//   const user = db.User.build();
-//   res.render('users-settings', {
-//     title: 'Settings',
-//     csrfToken: req.csrfToken()
-//   });
-// });
+router.get('/settings', csrfProtection, (req, res) => { 
+  
+  res.render('users-settings', {
+    title: 'Settings',
+    csrfToken: req.csrfToken()
+  });
+});
 
-// router.post('/settings', csrfProtection, asyncHandler(async(req, res) => {
-  // console.log(session.auth)
-  //const user = await db.User.findOne({where: })
-  // if (user) {
-  //   const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString()) //why toString?
-  //   if (passwordMatch) {
-  //     loginUser(req, res, user);
-  //     return res.redirect('/');
-  //   }
-  // }
-// }))
+router.post('/settings', csrfProtection, passwordValidators, asyncHandler(async (req, res) => {
+  const { oldPassword, password, confirmPassword } = req.body;
+  const user = await db.User.findByPk(req.session.auth.userId)
+  if (user) {
+    console.log(req.body)
+    const passwordMatch = await bcrypt.compare(req.body.oldPassword, user.hashedPassword.toString()) //why toString?
+    if (passwordMatch) {
+      // console.log('testing', req)
+      const validatorErrors = validationResult(req);
+      if (validatorErrors.isEmpty()) {
+        const hashedNewPassword = await bcrypt.hash(password, 10);
+        user.hashedPassword = hashedNewPassword;
+        await user.save();
+        res.redirect('/');
+      } else {
+        const errors = validatorErrors.array().map((error) => error.msg);
+        res.render('users-settings', {
+          title: 'Settings',
+          user,
+          errors,
+          csrfToken: req.csrfToken()
+        });
+      }
+    } else {
+      console.log("passwords don't match");
+    }
+  }
+}));
+
+router.delete('/settings', csrfProtection, asyncHandler(async(req, res) => {
+  
+}));
+
 module.exports = router;
