@@ -15,14 +15,12 @@
 
 .left-nav-links, .left-nav-public{
     list-style: none;
-    background-color: green;
     width: 50%;
 }
 
 .left-navbar-li {
     font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
     text-decoration: none;
-    background-color: pink;
     padding-bottom: 10px;    
 }
 
@@ -37,6 +35,13 @@
 
 .left-nav-public {
     width: 100%;
+}
+
+ol {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    right: 0;
 }
 
 
