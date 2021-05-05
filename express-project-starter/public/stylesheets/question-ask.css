@@ -1,0 +1,74 @@
+.ask-question-container {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0px 4px 4px rgb(12 13 14 / 15%);
+    width: 75%;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.ask-question-top {
+    text-align: center;
+    border-bottom: 3px solid #f48024;
+    justify-content: center;
+    width: 100%;
+}
+
+.ask-question-guidelines-dropdown {
+    background-color: #fff;
+}
+
+.ask-question-guidelines-dropdown-button {
+    background-color: #fafafb;
+    width: 80%;
+    text-align: left;
+    border: 1px solid gray;
+    border-radius: 3px;
+    height: 28px;
+}
+.ask-question-guidelines-dropdown-button-symbol {
+    color: gray;
+    padding-left: 10px;
+}
+
+.ask-question-form {
+    font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
+    width: 100%;
+    padding: 10px;
+}
+
+.question-ask-form-label {
+    font-weight: bold;
+
+}
+
+.question-ask-form-label p {
+    font-size: 0.8rem;
+}
+
+.question-ask-submit {
+    text-align: center;
+}
+
+.submit-button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+#tags-container {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid gray;
+    background-color: #fafafb;
+    border-radius: 3px;
+    padding: 5px;
+}

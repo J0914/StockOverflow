@@ -1,0 +1,43 @@
+extends layout
+
+block content
+    h1= title
+    div(class='ask-question-container')
+        div(class='ask-question-top')
+            img(src="/logo3.png" class="logo-login")
+            div(class='ask-question-guidelines-dropdown')
+                button(class='ask-question-guidelines-dropdown-button')
+                    span(class='ask-question-guidelines-dropdown-button-text') Step 1: Draft your question
+                    span(class='ask-question-guidelines-dropdown-button-symbol down-symbol') ▼
+
+        form(action='/questions/ask' class='ask-question-form' method='post')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            div
+                label(class='question-ask-form-label' for='questionTitle') Title:
+                    p(class='question-ask-form-label-description') Be specific and imagine you're asking a question to another person
+                input(type='text' name='questionTitle' class="question-ask-form-field width-100" required value=question.questionTitle placeholder='e.g. How do I begin datamining for cryptocurrency?')
+            div
+                label(class='question-ask-form-label' for="question-ask-textarea") Body:
+                    p(class='question-ask-form-label-description') Include all the information someone would need to answer your question
+                textarea(id="question-ask-textarea" name="questionText", cols="86", rows="15" class='question-ask-form-textarea' value=question.questionText required placeholder='Write your question here...')
+            div
+                label(class='question-ask-form-label' for="tags-container") Tags:
+                    p(class='question-ask-form-label-description') Mark all that apply
+                div(class='question-ask-form-tags-container' id="tags-container")
+                    div
+                        input(type="checkbox" id="crypto-tag" name="tags" value="crypto")
+                        label(for="crypto-tag") crypto
+                    div
+                        input(type="checkbox" id="block-chain-tag" name="tags" value="blockChain")
+                        label(for="block-chain-tag") block-chain
+                    div
+                        input(type="checkbox" id="stock-market-tag" name="tags" value="stockMarket")
+                        label(for="stock-market-tag") stock market
+                    div
+                        input(type="checkbox" id="data-mining-tag" name="tags" value="dataMining")
+                        label(for="data-mining-tag") data mining
+                    div
+                        input(type="checkbox" id="mutual-funds-tag" name="tags" value="mutualFunds")
+                        label(for="mutual-funds-tag") mutual funds
+            div(class="submit-button-container")
+                button(type=submit class="blue-button question-ask-submit") Submit your question
