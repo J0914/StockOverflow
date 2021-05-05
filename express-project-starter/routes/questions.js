@@ -7,15 +7,16 @@ router.get('/', asyncHandler(async(req,res) => {
     const questions = await db.Question.findAll({
         include: [{ 
             model: db.User, 
-            as: 'user' 
+            as: 'User' 
         }, { 
             model: db.QuestionVote, 
-            as: 'questionVote' 
+            as: 'QuestionVotes' 
         }, {
             model: db.Response, 
-            as: 'response'
+            as: 'Responses'
         }] 
     });
+    console.log(questions)
 
     res.render('questions', {
         title: 'Questions',

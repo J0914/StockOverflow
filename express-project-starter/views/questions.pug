@@ -8,10 +8,10 @@ block content
             div(class='stats-container')
                 div(class='vote')
                     button(class='vote-btn')
-                        a(class='question-link' href='/question/' + question.id)= question.questionVote.score
+                        a(class='question-link' href='/question/' + question.id)= question.QuestionVotes.score
                 div(class='responses')
                     button(class='responses-btn')
-                        a(class='question-link' href='/question/' + question.id)= //number of responses
+                        a(class='question-link' href='/question/' + question.id)
             div(class='summary')
                 h3
                     a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
