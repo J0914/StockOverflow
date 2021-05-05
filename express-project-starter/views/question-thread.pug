@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= question.questionTitle
+  div(class='question-text')= question.questionText
+    div(class='question-author')= question.User.userName
+  div(class='responses')
+    each response in responses
+      div(class='response-container')
+        div(class='response-voting') upvote/downvote stuff
+        div(class='response-content')
+          div(class='response-text')= response.responseText
+          div(class='response-author')= response.userId

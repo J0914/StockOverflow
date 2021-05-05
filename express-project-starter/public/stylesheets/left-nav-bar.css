@@ -10,7 +10,6 @@
     height: 100vh;
     display: flex;
     justify-content: flex-end;
-
 }
 
 .left-nav-links, .left-nav-public{
@@ -23,7 +22,7 @@
     font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
     text-decoration: none;
     background-color: pink;
-    padding-bottom: 10px;    
+    padding-bottom: 10px;
 }
 
 .hoverable:hover {
@@ -38,8 +37,3 @@
 .left-nav-public {
     width: 100%;
 }
-
-
-
-
-
