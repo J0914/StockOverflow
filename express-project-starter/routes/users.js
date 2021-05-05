@@ -142,8 +142,23 @@ router.post('/logout', (req, res) => {
   res.redirect('/');
 })
 
-router.get('/settings', (req, res) => {
-  res.render('users-settings')
-})
+// router.get('/settings', csrfProtection, (req, res) => { 
+//   const user = db.User.build();
+//   res.render('users-settings', {
+//     title: 'Settings',
+//     csrfToken: req.csrfToken()
+//   });
+// });
 
+// router.post('/settings', csrfProtection, asyncHandler(async(req, res) => {
+  // console.log(session.auth)
+  //const user = await db.User.findOne({where: })
+  // if (user) {
+  //   const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString()) //why toString?
+  //   if (passwordMatch) {
+  //     loginUser(req, res, user);
+  //     return res.redirect('/');
+  //   }
+  // }
+// }))
 module.exports = router;
