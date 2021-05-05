@@ -142,6 +142,8 @@ router.post('/logout', (req, res) => {
   res.redirect('/');
 })
 
-
+router.get('/settings', (req, res) => {
+  res.render('users-settings')
+})
 
 module.exports = router;
