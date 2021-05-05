@@ -6,13 +6,25 @@ const { asyncHandler } = require('./utils')
 /* GET home page. */
 router.get('/', asyncHandler(async(req, res, next) => {
   let questions = await db.Question.findAll({
-    include: 'User',
-    order: [['createdAt', 'DESC']]
+    include: [{ 
+      model: db.User, 
+      as: 'User'  
+  }, { 
+      model: db.QuestionVote, 
+      as: 'QuestionVotes',
+  }, {
+      model: db.Response, 
+      as: 'Responses'
+  }] 
   })
+  console.log(questions[0].QuestionVotes[0].score)
+
+  let score;
 
   res.render('index', { 
-    title: 'Welcome to Stock Overflow', 
-    questions 
+    title: 'Top Questions', 
+    questions,
+    score
   });
 }));
 

@@ -17,6 +17,7 @@ module.exports = {
         references: {model: "Questions"}
       },
       score: {
+        defaultValue: 0,
         type: Sequelize.INTEGER
       },
       createdAt: {

@@ -7,17 +7,25 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  h1= title
-  div(id='questions')
-    each question in questions
-        div(class='question-summary')
-            div(class='stats-container')
-                div(class='vote')
-                div(class='responses')
-                div(class='views')
-            div(class='summary')
-                h3
-                    a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
-                div(class='excerpt')= question.questionText
-                div(class='tags') put tags here
-                div(class='author')= question.User.userName
+    div(class='h1')
+        h1= title
+            a(class='ask-question-btn' href='/questions/ask') Ask Question
+    div(id='questions')
+        each question in questions
+            div(class='question-summary')
+                div(class='stats-container')
+                    div(class='vote-div')
+                        div(class='votes')
+                            a(title=question.QuestionVotes[0].score href='/questions/' + question.id)= question.QuestionVotes[0].score
+                        div(class='labels') votes
+                    div(class='responses-div')
+                        div(class='responses')
+                            a(title=question.Responses.length href='/questions/' + question.id)= question.Responses.length
+                        div(class='labels') responses
+                div(class='summary')
+                    h3
+                        a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
+                    div(class='excerpt')= question.questionText
+                    div(class='tags') put tags here
+                    div(class='author')= question.User.userName
+                    //- div(class='createdAt')= question.createdAt

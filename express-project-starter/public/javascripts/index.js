@@ -1,3 +1,5 @@
 window.addEventListener("load", (event)=>{
-    console.log("hello from javascript!")
+    const statsContainer = document.querySelector('class', 'stats-container')
+
+    
 })
