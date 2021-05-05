@@ -1,6 +1,10 @@
-const {
-  db: { username, password, database, host },
-} = require('./index');
+const config = require('./index');
+const db = config.db;
+const username = db.username;
+const password = db.password;
+const database = db.database;
+const host = db.host;
+
 
 module.exports = {
   development: {
@@ -9,10 +13,17 @@ module.exports = {
     database,
     host,
     dialect: 'postgres',
+    seederStorage: 'sequelize',
   },
   production: {
-    use_env_variable: 'postgres://ocyhcjtubhlcza:8dac876477f48f8e5e8f76ff80f04a877c1aebde3ffe3ee4cb41e91f34087400@ec2-52-87-107-83.compute-1.amazonaws.com:5432/dclfbaio1semk7',
+    use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
     seederStorage: 'sequelize',
-  }
-};
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+},
+}
