@@ -7,12 +7,12 @@ const { check, validationResult } = require('express-validator');
 router.get('/', asyncHandler(async(req,res) => {
     const questions = await db.Question.findAll({
 
-        include: [{ 
-            model: db.User, 
-            as: 'User'  
-        }, { 
-            model: db.QuestionVote, 
-            as: 'QuestionVotes' 
+        include: [{
+            model: db.User,
+            as: 'User'
+        }, {
+            model: db.QuestionVote,
+            as: 'QuestionVotes'
         }, {
             model: db.QuestionVote,
             as: 'QuestionVotes'
@@ -63,7 +63,41 @@ router.get('/ask', csrfProtection, (req, res) => {
 router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req, res, next) => {
     console.log(req.body)
 
+    const { questionTitle, questionText, tags } = req.body;
+
+    const question = db.Question.build({
+        questionTitle,
+        questionText,
+    })
+
+    let newQuestion;
+
     const validatorErrors = validationResult(req);
+
+    if (validatorErrors.isEmpty()) { //need to get userId for authorId
+        question.authorId = 2;
+        newQuestion = await question.save();
+    } else {
+        const errors = validatorErrors.array().map((error) => error.msg);
+        res.render('question-ask', { title: 'Ask A New Question', question, errors, csrfToken: req.csrfToken() })
+    }
+
+    if(tags) {
+        for(let i = 0; i < tags.length; i++) {
+            let tag = tags[i];
+
+            const dbTag = db.Tag.findOne({where: {
+                    name: tag
+                }
+            });
+            db.QuestionTag.build({
+                questionId: newQuestion.id,
+                tagId: dbTag.id
+            })
+        }
+    }
+
+    res.redirect(`/questions/${newQuestion.id}`)
 }))
 
 module.exports = router
