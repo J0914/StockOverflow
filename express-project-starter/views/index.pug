@@ -7,8 +7,9 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  div(class='h1')
-    h1= title
+    div(class='h1')
+        h1= title
+            a(class='ask-question-btn' href='/questions/ask') Ask Question
     div(id='questions')
         each question in questions
             div(class='question-summary')
