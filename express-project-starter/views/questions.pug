@@ -7,8 +7,11 @@ block content
         div(class='question-summary')
             div(class='stats-container')
                 div(class='vote')
+                    button(class='vote-btn')
+                        a(class='question-link' href='/question/' + question.id)= question.QuestionVotes.score
                 div(class='responses')
-                div(class='views')
+                    button(class='responses-btn')
+                        a(class='question-link' href='/question/' + question.id)
             div(class='summary')
                 h3
                     a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
