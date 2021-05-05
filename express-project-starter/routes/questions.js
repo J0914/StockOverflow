@@ -5,10 +5,18 @@ const { asyncHandler } = require('./utils')
 
 router.get('/', asyncHandler(async(req,res) => {
     const questions = await db.Question.findAll({
-        include: 'User'
-        // need to include QuestionVote so we can
-        // order by number of votes on this page.
-    })
+        include: [{ 
+            model: db.User, 
+            as: 'User' 
+        }, { 
+            model: db.QuestionVote, 
+            as: 'QuestionVotes' 
+        }, {
+            model: db.Response, 
+            as: 'Responses'
+        }] 
+    });
+    console.log(questions)
 
     res.render('questions', {
         title: 'Questions',
@@ -30,3 +38,4 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res) => { //does this need a cs
 }))
 
 module.exports = router
+
