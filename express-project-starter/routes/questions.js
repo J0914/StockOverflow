@@ -5,14 +5,32 @@ const { asyncHandler } = require('./utils')
 
 router.get('/', asyncHandler(async(req,res) => {
     const questions = await db.Question.findAll({
-        include: 'User'
-        // need to include QuestionVote so we can 
-        // order by number of votes on this page.
-    })
+        include: [{ 
+            model: db.User, 
+            as: 'user' 
+        }, { 
+            model: db.QuestionVote, 
+            as: 'questionVote' 
+        }, {
+            model: db.Response, 
+            as: 'response'
+        }] 
+    });
 
     res.render('questions', {
         title: 'Questions',
         questions
+    })
+}))
+
+router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
+    const questionId = parseInt(req.params.id, 10);
+    const question = db.Question.findByPk(questionId);
+
+    res.render('question-id', {
+        title: question.title,
+        question,
+        
     })
 }))
 
