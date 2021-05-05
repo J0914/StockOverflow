@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+ div(class='login-div')
+        img(src="/logo3.png" class="logo-login") 
+        form(action='/users/signup' class='login-form' method='post')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            div
+                label(class='labels') Old Password:
+                input(type='password' name='password' class="login-field" value=user.email)
+            div
+                label(class='labels') New Password:
+                input(type='password' name='password' class="login-field" value=user.password placeholder='abc123ABC!')
+            div
+                label(class='labels') Confirm New Password:
+                input(type='password' name='confirmPassword' class="login-field" value=user.password placeholder='abc123ABC!')
+            div
+                if errors
+                    div(class='alert alert-danger' role='alert')
+                        p The following error(s) occurred:
+                        ul
+                            each error in errors
+                                li(class='alert-danger li-margin-class')= error
+            div
+                button(type='submit' class="blue-button login-button") Submit
