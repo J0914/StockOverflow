@@ -1,20 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/models')
-const { asyncHandler } = require('./utils')
+const { asyncHandler, csrfProtection } = require('./utils')
+const { check, validationResult } = require('express-validator');
 
 router.get('/', asyncHandler(async(req,res) => {
     const questions = await db.Question.findAll({
-        include: [{ 
-            model: db.User, 
-            as: 'User' 
-        }, { 
-            model: db.QuestionVote, 
-            as: 'QuestionVotes' 
+        include: [{
+            model: db.User,
+            as: 'User'
         }, {
-            model: db.Response, 
+            model: db.QuestionVote,
+            as: 'QuestionVotes'
+        }, {
+            model: db.Response,
             as: 'Responses'
-        }] 
+        }]
     });
     console.log(questions)
 
@@ -37,5 +38,29 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res) => { //does this need a cs
     res.render('question-thread', { responses, question })
 }))
 
-module.exports = router
+const questionValidators = [
+    check('questionTitle')
+      .exists({ checkFalsy: true })
+      .withMessage('Please provide a value for your question title')
+      .isLength({ max: 100 })
+      .withMessage('Question title must be less than 100 characters long'),
+    check('questionText')
+      .exists({ checkFalsy: true })
+      .withMessage('Please include information for your question body')
+];
 
+
+router.get('/ask', csrfProtection, (req, res) => {
+    const question = db.Question.build()
+
+    res.render('question-ask', { csrfToken: req.csrfToken(), question, title: 'Ask A New Question'})
+})
+
+
+router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req, res, next) => {
+    console.log(req.body)
+
+    const validatorErrors = validationResult(req);
+}))
+
+module.exports = router
