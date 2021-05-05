@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "per-env",
-    "start:development": "nodemon -r dotenv/config ./bin/www",
-    "start:production": "node ./bin/www"
+    "start:development": "nodemon -r dotenv/config ./express-project-starter/bin/www",
+    "start:production": "node ./express-project-starter/bin/www"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
