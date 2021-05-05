@@ -6,7 +6,7 @@
 }
 
 .left-navbar {
-    border-right: 1px solid rgb(0, 0, 0);
+    border-right: 1px solid rgb(133, 133, 133);
     height: 100vh;
     display: flex;
     justify-content: flex-end;
