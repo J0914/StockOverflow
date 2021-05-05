@@ -6,9 +6,13 @@ const { check, validationResult } = require('express-validator');
 
 router.get('/', asyncHandler(async(req,res) => {
     const questions = await db.Question.findAll({
-        include: [{
-            model: db.User,
-            as: 'User'
+
+        include: [{ 
+            model: db.User, 
+            as: 'User'  
+        }, { 
+            model: db.QuestionVote, 
+            as: 'QuestionVotes' 
         }, {
             model: db.QuestionVote,
             as: 'QuestionVotes'
@@ -17,7 +21,6 @@ router.get('/', asyncHandler(async(req,res) => {
             as: 'Responses'
         }]
     });
-    console.log(questions)
 
     res.render('questions', {
         title: 'Questions',

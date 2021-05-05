@@ -6,7 +6,7 @@
 }
 
 .left-navbar {
-    border-right: 1px solid rgb(0, 0, 0);
+    border-right: 1px solid rgb(133, 133, 133);
     height: 100vh;
     display: flex;
     justify-content: flex-end;
@@ -14,15 +14,14 @@
 
 .left-nav-links, .left-nav-public{
     list-style: none;
-    background-color: green;
-    width: 50%;
+    width: 150px;
 }
 
 .left-navbar-li {
     font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
     text-decoration: none;
-    background-color: pink;
-    padding-bottom: 10px;
+
+    padding-bottom: 10px; 
 }
 
 .hoverable:hover {
@@ -36,5 +35,12 @@
 
 .left-nav-public {
     width: 100%;
+}
+
+ol {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    right: 0;
 }
 
