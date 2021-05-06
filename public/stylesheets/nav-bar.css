@@ -102,6 +102,9 @@ img.logo-sm {
     background-color: #0064bd;
   }
 
+.hidden-submit {
+  display: none;
+}
 
 /* 640 logo text and left sidebar cutoff */
 
