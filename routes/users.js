@@ -111,8 +111,6 @@ const loginValidators = [
 ]
 
 router.get('/login', csrfProtection, asyncHandler(async(req, res) => {
-  const user = db.User.build();
-
   res.render('users-login', {
     title: 'Login',
     csrfToken: req.csrfToken()
@@ -152,13 +150,24 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
   });
 }));
 
+router.post('/loginDemo', asyncHandler(async (req, res) => {
+  const user = await db.User.findOne({ where: { id: 1 } })
+  loginUser(req, res, user);
+  console.log("we did it");
+  res.end();
+}))
+
 router.post('/logout', (req, res) => {
   logoutUser(req, res);
   res.redirect('/');
 })
 
 router.get('/settings', csrfProtection, (req, res) => { 
-  
+  console.log(req);
+  console.log("break");
+  console.log(req.session);
+  console.log('break');
+  console.log(res.locals);
   res.render('users-settings', {
     title: 'Settings',
     csrfToken: req.csrfToken()
@@ -166,11 +175,11 @@ router.get('/settings', csrfProtection, (req, res) => {
 });
 
 router.post('/settings', csrfProtection, passwordValidators, asyncHandler(async (req, res) => {
-  const { oldPassword, password, confirmPassword } = req.body;
+  const { oldPassword, password} = req.body;
   const user = await db.User.findByPk(req.session.auth.userId)
   if (user) {
     console.log(req.body)
-    const passwordMatch = await bcrypt.compare(req.body.oldPassword, user.hashedPassword.toString()) //why toString?
+    const passwordMatch = await bcrypt.compare(oldPassword, user.hashedPassword.toString()) //why toString?
     if (passwordMatch) {
       // console.log('testing', req)
       const validatorErrors = validationResult(req);
@@ -194,8 +203,10 @@ router.post('/settings', csrfProtection, passwordValidators, asyncHandler(async 
   }
 }));
 
-router.delete('/settings', csrfProtection, asyncHandler(async(req, res) => {
-  
-}));
+// router.delete('/settings/delete', csrfProtection, asyncHandler(async(req, res) => {
+//   const user = await db.User.findByPk(req.session.auth.userId)
+//   db.user.destroy();
+//   res.redirect('/');
+// }));
 
 module.exports = router;
