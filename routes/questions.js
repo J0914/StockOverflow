@@ -130,39 +130,28 @@ router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req,
 }));
 
 
-router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
-    const vote = req.body.score;
-    const questionId = Number(req.params.id);
-    const userId = req.session.auth.userId;
-    let questionVote;
-    
-    if (userId){
-        if (questionVote === undefined){
-            totalScore += vote;
-            questionVote = db.QuestionVote.build({ userId, questionId, vote });
-        } else {
-
-        }
-    } else {
-        res.redirect('/login');
-    }
-
-    // const { question, allresponses, totalScore } = req.body;
-    // const question = await db.Question.build(question);
-    // console.log(question)
-//     // query vote score
-    // const totalScore = await db.QuestionVote.build(totalScore);
-    // fetch request 
-    // res.json({})
+router.post('/:id(\\d+)/vote', asyncHandler(async (req, res) => {
+    console.log('1')
+    // const vote = req.body.score;
+    // const questionId = Number(req.params.id);
+    // const userId = req.session.auth.userId;
+    // let questionVote;
+    // if (userId){
+    //     console.log('2')
+    //     if (questionVote === undefined){
+    //         console.log('3')
+    //         totalScore += vote;
+    //         questionVote = await db.QuestionVote.create({ userId, questionId, totalScore });
+    //     } else {
+    //         console.log('something')
+    //     }
+    // } else {
+    //     res.redirect('/login');
+    // }
+    //res.render('question-thread', { allResponses, question, totalScore })
     res.end()
-//     res.render('question-thread', { allResponses, question, totalScore, response: newResponse })
+
 }));
-        
-    // if click again
-        // delete vote
-        //update score
-    //if comment
-        //update responses
 
 
 module.exports = router
