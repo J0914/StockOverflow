@@ -1,14 +1,38 @@
 extends layout
 
+append head
+    script(type="text/javascript" src="/javascripts/question-add.js")
+
 block content
     h1= title
     div(class='ask-question-container')
         div(class='ask-question-top')
             img(src="/logo3.png" class="logo-login")
             div(class='ask-question-guidelines-dropdown')
-                button(class='ask-question-guidelines-dropdown-button')
+                button(class='ask-question-guidelines-dropdown-button accordion-1')
                     span(class='ask-question-guidelines-dropdown-button-text') Step 1: Draft your question
-                    span(class='ask-question-guidelines-dropdown-button-symbol down-symbol') ▼
+                    span(class='ask-question-guidelines-dropdown-button-symbol accordion-symbol-1 down-symbol') ▼
+                div(class="accordion-content-1 hidden")
+                    p The community is here to help you with specific questions about investing, cryptocurrency, stocks, and wealth management.
+                    p Avoid asking opinion-based questions.
+                    button(class='ask-question-guidelines-dropdown-button accordion-2')
+                        span(class='ask-question-guidelines-dropdown-button-text') 1. Summarize the problem
+                        span(class='ask-question-guidelines-dropdown-button-symbol accordion-symbol-2 down-symbol') ▼
+                    div(class="accordion-content-2 hidden")
+                        ul
+                            li Include details about your goal
+                            li Describe expected and actual results
+                            li Include any error messages
+                    button(class='ask-question-guidelines-dropdown-button accordion-3')
+                        span(class='ask-question-guidelines-dropdown-button-text') 2. Describe what you've tried
+                        span(class='ask-question-guidelines-dropdown-button-symbol accordion-symbol-3 down-symbol') ▼
+                    div(class="accordion-content-3 hidden")
+                        p Show what you’ve tried and tell us what you found (on this site or elsewhere) and why it didn’t meet your needs. You can get better answers when you provide research.
+                    button(class='ask-question-guidelines-dropdown-button accordion-4')
+                        span(class='ask-question-guidelines-dropdown-button-text') 3. Show some code
+                        span(class='ask-question-guidelines-dropdown-button-symbol accordion-symbol-4 down-symbol') ▼
+                    div(class="accordion-content-4 hidden")
+                        p When appropriate, share the minimum amount of code others need to reproduce your problem
             div(class="errors-container")
                 if errors
                     div(class='alert alert-danger' role='alert')

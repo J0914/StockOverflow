@@ -25,14 +25,14 @@ router.get('/', asyncHandler(async(req,res) => {
           const score = vote.score;
           accum += score;
           return accum
-        }, 0) 
+        }, 0)
         return totalScore
     }
-    
+
     questions.map(question => {
         let score = findScore(question);
         question['totalScore'] = score;
-    }) 
+    })
 
     res.render('questions', {
         title: 'All Questions',
@@ -44,14 +44,14 @@ router.get('/', asyncHandler(async(req,res) => {
 router.get('/:id(\\d+)', asyncHandler(async(req, res) => { //does this need a csrfToken for the new response form...?
     const questionId = parseInt(req.params.id, 10);
     const question = await db.Question.findByPk(questionId, {include: 'User'});
-    const responses = await db.Response.findAll({
+    const allResponses = await db.Response.findAll({
         where: {
             questionId: questionId
         },
     })
+    const newResponse = await db.Response.build()
 
-
-    res.render('question-thread', { responses, question })
+    res.render('question-thread', { allResponses, question, response: newResponse })
 }))
 
 const questionValidators = [
@@ -74,8 +74,6 @@ router.get('/ask', csrfProtection, (req, res) => {
 
 
 router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req, res, next) => {
-
-
 
     let userId;
     if (req.session.auth) {

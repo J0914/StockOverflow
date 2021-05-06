@@ -4,10 +4,28 @@ block content
   h1= question.questionTitle
   div(class='question-text')= question.questionText
     div(class='question-author')= question.User.userName
+  h2= `${allResponses.length} Responses`
   div(class='responses')
-    each response in responses
+    each response in allResponses
       div(class='response-container')
         div(class='response-voting') upvote/downvote stuff
         div(class='response-content')
           div(class='response-text')= response.responseText
           div(class='response-author')= response.userId
+  div(class='submit-response-container')
+    h1 Your Response
+    form(action="questions/:id/response/submit" method="post")
+      input(type="hidden" name="_csrf" value=csrfToken)
+      div
+        textarea(cols="86" rows="15" name="responseText" required value=response.responseText placeholder="Your response here...")
+        div(class="response-criteria-box")
+          ul Thanks for contributing a response to Stock Overflow!
+            li
+              span Please be sure to
+              span(class="italic") answer the question.
+              span Provide details and share your research!
+          ul But try to
+            span(class="italic") avoid...
+            li Asking for help, clarification, or responding to other answers.
+            li Making statements based on opinion; back them up with references, documentation, or personal experience.
+      button(class="blue-button" type="submit") Post Your Answer
