@@ -61,7 +61,13 @@ router.get('/ask', csrfProtection, (req, res) => {
 
 
 router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req, res, next) => {
-    console.log(req.body)
+
+    let userId;
+    if (req.session.auth) {
+        userId = req.session.auth.userId;
+    } else {
+        userId = 0;
+    }
 
     const { questionTitle, questionText, tags } = req.body;
 
@@ -74,9 +80,15 @@ router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req,
 
     const validatorErrors = validationResult(req);
 
-    if (validatorErrors.isEmpty()) { //need to get userId for authorId
-        question.authorId = 2;
-        newQuestion = await question.save();
+    if (validatorErrors.isEmpty()) {
+        if(!userId) {
+            const errors = ['You must be logged in to post'];
+            res.render('question-ask', { title: 'Ask A New Question', question, errors, csrfToken: req.csrfToken() })
+            return;
+        } else {
+            question.authorId = userId;
+            newQuestion = await question.save();
+        }
     } else {
         const errors = validatorErrors.array().map((error) => error.msg);
         res.render('question-ask', { title: 'Ask A New Question', question, errors, csrfToken: req.csrfToken() })
