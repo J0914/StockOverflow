@@ -25,14 +25,14 @@ router.get('/', asyncHandler(async(req,res) => {
           const score = vote.score;
           accum += score;
           return accum
-        }, 0) 
+        }, 0)
         return totalScore
     }
-    
+
     questions.map(question => {
         let score = findScore(question);
         question['totalScore'] = score;
-    }) 
+    })
 
     res.render('questions', {
         title: 'All Questions',
@@ -74,8 +74,6 @@ router.get('/ask', csrfProtection, (req, res) => {
 
 
 router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req, res, next) => {
-
-
 
     let userId;
     if (req.session.auth) {
