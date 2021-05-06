@@ -4,17 +4,17 @@ block content
 
  div(class='login-div')
         img(src="/logo3.png" class="logo-login") 
-        form(action='/users/signup' class='login-form' method='post')
+        form(action='/users/settings' class='login-form' method='post')
             input(type='hidden' name='_csrf' value=csrfToken)
             div
                 label(class='labels') Old Password:
-                input(type='password' name='password' class="login-field" value=user.email)
+                input(type='password' name='oldPassword' class="login-field")
             div
                 label(class='labels') New Password:
-                input(type='password' name='password' class="login-field" value=user.password placeholder='abc123ABC!')
+                input(type='password' name='password' class="login-field" placeholder='abc123ABC!')
             div
                 label(class='labels') Confirm New Password:
-                input(type='password' name='confirmPassword' class="login-field" value=user.password placeholder='abc123ABC!')
+                input(type='password' name='confirmPassword' class="login-field" placeholder='abc123ABC!')
             div
                 if errors
                     div(class='alert alert-danger' role='alert')
@@ -24,3 +24,5 @@ block content
                                 li(class='alert-danger li-margin-class')= error
             div
                 button(type='submit' class="blue-button login-button") Submit
+            div
+                p: a(href='/users/signup' class='labels') Delete Account
