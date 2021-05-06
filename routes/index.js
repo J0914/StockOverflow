@@ -26,7 +26,12 @@ router.get('/', asyncHandler(async(req, res, next) => {
       return accum
     }, 0) 
     return totalScore
-  }  
+}
+
+questions.map(question => {
+    let score = findScore(question);
+    question['totalScore'] = score;
+})   
 
   res.render('index', { 
     title: 'Top Questions', 
