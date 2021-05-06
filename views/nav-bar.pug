@@ -1,9 +1,16 @@
 extends layout
+
+append head
+    script(type="text/javascript" src="/javascripts/question-add.js")
+    
 .header-nav
     .logo-container
         img(class="logo" src=".../planning-documents/logo2")
     .search-bar
-        input(class="search-bar-field" placeholder="Search..." name="q" type="text")
+        form(method="get" action="/search")
+            input(type="hidden" name="_csrf" value=csrfToken)
+            input(class="search-bar-field" placeholder="Search..." name="q" type="text")
+            button(class="hidden-submit search-submit" type="submit")
     .right-buttons
         button(id="login-button" class="light-blue-button") Log In
         button(id="signup-button" class="blue-button") Sign Up
