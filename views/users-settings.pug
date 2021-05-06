@@ -24,5 +24,8 @@ block content
                                 li(class='alert-danger li-margin-class')= error
             div
                 button(type='submit' class="blue-button login-button") Submit
-            div
-                p: a(href='/users/signup' class='labels') Delete Account
+        div
+            form(action='/users/settings/delete' method='post')
+                input(type='hidden' name='_csrf' value=csrfToken)
+                button(type='submit' class='delete-button labels blue-button') Delete Account
+                

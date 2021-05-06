@@ -41,7 +41,7 @@
 }
 
 .question-summary {
-    background-color: #fdf7e3;
+    background-color:#fdf7e3;
     box-sizing: border-box;
     padding-left: 8px;
     width: 100%;
@@ -65,4 +65,8 @@
     text-decoration: none;
 }
 
+
+.question {
+    background-color: red;
+}
 

@@ -7,10 +7,11 @@ html
         link(rel='stylesheet' href='/stylesheets/reset.css')
         link(rel='stylesheet' href='/stylesheets/nav-bar.css')
         script(type="text/javascript" src="/javascripts/nav-bar.js")
+        //- script(type="text/javascript" src="/javascripts/delete-acc.js")
         link(rel='stylesheet' href='/stylesheets/login.css')
         link(rel='stylesheet' href='/stylesheets/left-nav-bar.css')
         link(rel='stylesheet' href='/stylesheets/question-ask.css')
-
+        link(rel='stylesheet' href='/stylesheets/questions.css')
   body
     .header-nav
       .logo-container
@@ -24,14 +25,16 @@ html
             button(class="hidden-submit search-submit" type="submit")
       if locals.authenticated
         .right-buttons
+          div
+              span Welcome #{user.userName}
           form(action='/users/logout' method='post')
             button(class='light-blue-button' type='submit') Logout
           a(href="/users/settings" class='settings-img')
             img(src="/settings.png" class='settings-img')
-
       else
         .right-buttons
           a(id="login-button" href="/users/login" class="light-blue-button") Log In
+          a(id="demo-user-button" class="light-blue-button") Demo User
           a(id="signup-button" href="/users/signup" class="blue-button") Sign Up
     .body-container
       .left-navbar

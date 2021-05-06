@@ -111,8 +111,6 @@ const loginValidators = [
 ]
 
 router.get('/login', csrfProtection, asyncHandler(async(req, res) => {
-  const user = db.User.build();
-
   res.render('users-login', {
     title: 'Login',
     csrfToken: req.csrfToken()
@@ -152,13 +150,19 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
   });
 }));
 
+router.post('/loginDemo', asyncHandler(async (req, res) => {
+  const user = await db.User.findOne({ where: { id: 1 } })
+  loginUser(req, res, user);
+  res.end();
+}))
+
 router.post('/logout', (req, res) => {
   logoutUser(req, res);
   res.redirect('/');
 })
 
 router.get('/settings', csrfProtection, (req, res) => { 
-  
+
   res.render('users-settings', {
     title: 'Settings',
     csrfToken: req.csrfToken()
@@ -166,13 +170,11 @@ router.get('/settings', csrfProtection, (req, res) => {
 });
 
 router.post('/settings', csrfProtection, passwordValidators, asyncHandler(async (req, res) => {
-  const { oldPassword, password, confirmPassword } = req.body;
+  const { oldPassword, password} = req.body;
   const user = await db.User.findByPk(req.session.auth.userId)
   if (user) {
-    console.log(req.body)
-    const passwordMatch = await bcrypt.compare(req.body.oldPassword, user.hashedPassword.toString()) //why toString?
+    const passwordMatch = await bcrypt.compare(oldPassword, user.hashedPassword.toString()) //why toString?
     if (passwordMatch) {
-      // console.log('testing', req)
       const validatorErrors = validationResult(req);
       if (validatorErrors.isEmpty()) {
         const hashedNewPassword = await bcrypt.hash(password, 10);
@@ -189,13 +191,65 @@ router.post('/settings', csrfProtection, passwordValidators, asyncHandler(async 
         });
       }
     } else {
-      console.log("passwords don't match");
+      const errors = ['Your old password is incorrect! Please Try Again!']
+        res.render('users-settings', {
+          title: 'Settings',
+          user,
+          errors,
+          csrfToken: req.csrfToken()
+        });
     }
   }
 }));
 
-router.delete('/settings', csrfProtection, asyncHandler(async(req, res) => {
-  
+router.post('/settings/delete', csrfProtection, asyncHandler(async(req, res) => {
+  const userId = req.session.auth.userId
+  if (userId !== 1) {
+    const user = await db.User.findByPk(userId);
+    const questions = await db.Question.findAll({ 
+      where: { authorId: userId },
+    })
+    const responses = await db.Response.findAll({ 
+      where: { userId: userId },
+    })
+    const questionVotes = await db.QuestionVote.findAll({ 
+      where: { userId: userId },
+    })
+    const responseVotes = await db.ResponseVote.findAll({ 
+      where: { userId: userId },
+    })
+
+      logoutUser(req, res)
+      if (responseVotes.length > 0) {
+        responseVotes.forEach(async(rVote) => {
+          await rVote.destroy();
+        })
+      }
+      if (responses.length > 0) {
+        responses.forEach(async(response) => {
+          await response.destroy();
+        })
+      }
+      if (questionVotes.length > 0) {
+        questionVotes.forEach(async(qVote) => {
+          await qVote.destroy();
+        })
+      }
+      if (questions.length > 0) {
+        questions.forEach(async(question) => {
+          await question.destroy();
+        })
+      }
+      await user.destroy();
+      res.redirect('/');
+  } else {
+    const errors = ['Sorry, you cannot delete the Demo User!']
+    res.render('users-settings', {
+      title: 'Settings',
+      errors,
+      csrfToken: req.csrfToken()
+    });
+  }
 }));
 
 module.exports = router;
