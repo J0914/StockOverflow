@@ -4,9 +4,10 @@ const db = require('../db/models')
 const { asyncHandler, csrfProtection } = require('./utils')
 const { check, validationResult } = require('express-validator');
 
+
 router.get('/', asyncHandler(async(req,res) => {
     const questions = await db.Question.findAll({
-
+        
         include: [{
             model: db.User,
             as: 'User'
@@ -18,7 +19,7 @@ router.get('/', asyncHandler(async(req,res) => {
             as: 'Responses'
         }],
     });
-
+    
     const findScore = (question) => {
         const allVotes = question.QuestionVotes;
         const totalScore = allVotes.reduce((accum, vote) => {
@@ -28,7 +29,7 @@ router.get('/', asyncHandler(async(req,res) => {
         }, 0)
         return totalScore
     }
-
+    
     questions.map(question => {
         let score = findScore(question);
         question['totalScore'] = score;
@@ -48,10 +49,12 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res) => { //does this need a cs
         where: {
             questionId: questionId
         },
-    })
-    const newResponse = await db.Response.build()
+    }); 
+    const newResponse = await db.Response.build();
+    const questionVotes = await db.QuestionVote.findAll({ where: { questionId: question.id } });
+    const totalScore = await questionVotes[0].dataValues.score;
 
-    res.render('question-thread', { allResponses, question, response: newResponse })
+    res.render('question-thread', { allResponses, question, totalScore, response: newResponse })
 }))
 
 const questionValidators = [
@@ -124,6 +127,42 @@ router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req,
     }
 
     res.redirect(`/questions/${newQuestion.id}`)
-}))
+}));
+
+
+router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
+    const vote = req.body.score;
+    const questionId = Number(req.params.id);
+    const userId = req.session.auth.userId;
+    let questionVote;
+    
+    if (userId){
+        if (questionVote === undefined){
+            totalScore += vote;
+            questionVote = db.QuestionVote.build({ userId, questionId, vote });
+        } else {
+
+        }
+    } else {
+        res.redirect('/login');
+    }
+
+    // const { question, allresponses, totalScore } = req.body;
+    // const question = await db.Question.build(question);
+    // console.log(question)
+//     // query vote score
+    // const totalScore = await db.QuestionVote.build(totalScore);
+    // fetch request 
+    // res.json({})
+    res.end()
+//     res.render('question-thread', { allResponses, question, totalScore, response: newResponse })
+}));
+        
+    // if click again
+        // delete vote
+        //update score
+    //if comment
+        //update responses
+
 
 module.exports = router
