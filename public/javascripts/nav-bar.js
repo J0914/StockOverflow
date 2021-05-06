@@ -18,11 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const demoUserButton = document.querySelector("#demo-user-button");
     if (demoUserButton) {
         demoUserButton.addEventListener("click", async (event) => {
-            const res = await fetch('/users/loginDemo', { method: 'POST', })
+            const res = await fetch('/users/loginDemo', { method: 'POST' })
             console.log(res.status);
             if (res.status === 200) {
                 window.location.reload();
             }
+            return res
             // location.reload();
         })
     }
