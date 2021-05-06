@@ -22,14 +22,16 @@ html
           input(class="search-bar-field" placeholder="Search..." name="q" type="text")
       if locals.authenticated
         .right-buttons
+          div
+              span Welcome #{user.userName}
           form(action='/users/logout' method='post')
             button(class='light-blue-button' type='submit') Logout
           a(href="/users/settings" class='settings-img')
             img(src="/settings.png" class='settings-img')
-
       else
         .right-buttons
           a(id="login-button" href="/users/login" class="light-blue-button") Log In
+          a(id="demo-user-button" class="light-blue-button") Demo User
           a(id="signup-button" href="/users/signup" class="blue-button") Sign Up
     .body-container
       .left-navbar

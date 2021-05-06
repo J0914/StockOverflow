@@ -2,6 +2,7 @@ const db = require('./db/models');
 
 const loginUser = (req, res, user) => {
     req.session.auth = { 
+        userName: user.userName,
         userId: user.id
     }
 }
