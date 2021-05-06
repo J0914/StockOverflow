@@ -1,21 +1,57 @@
 extends layout
 
+append head
+  //- add page specific styles by appending to the head
+  link(rel="stylesheet" href="/stylesheets/index.css")
+  //- add page specific js
+  script(src="/javascripts/index.js" type="module" defer)
+
 block content
-  h1= title
-  div(id='questions')
-    each question in questions
-        div(class='question-summary')
-            div(class='stats-container')
-                div(class='vote')
-                    button(class='vote-btn')
-                        a(class='question-link' href='/question/' + question.id)= question.QuestionVotes.score
-                div(class='responses')
-                    button(class='responses-btn')
-                        a(class='question-link' href='/question/' + question.id)
-            div(class='summary')
-                h3
-                    a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
-                div(class='excerpt')= question.questionText
-                div(class='tags') put tags here
-                div(class='author')= question.User.userName
+    div(class='h1')
+        h1= title
+            if locals.authenticated
+                a(class='blue-button' href='/questions/ask') Ask Question
+            else
+                a(class='blue-button' href='/users/login') Ask Question
+    div(id='questions')
+        each question in questions
+            div(class='question-summary')
+                div(class='stats-container')
+                    div(class='vote-div')
+                        div(class='votes')
+                            a(title=question.totalScore href='/questions/' + question.id)= question.totalScore
+                        div(class='labels') votes
+                    div(class='responses-div')
+                        div(class='responses')
+                            a(title=question.Responses.length href='/questions/' + question.id)= question.Responses.length
+                        div(class='labels') responses
+                div(class='summary')
+                    h3
+                        a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
+                    div(class='excerpt')= question.questionText
+                    div(class='tags') put tags here
+                    div(class='author')= question.User.userName
+                    //- div(class='createdAt')= question.createdAt
+
+
+//- extends layout
+
+//- block content
+//-   h1= title
+//-   div(id='questions')
+//-     each question in questions
+//-         div(class='question-summary')
+//-             div(class='stats-container')
+//-                 div(class='vote')
+//-                     button(class='vote-btn')
+//-                         a(class='question-link' href='/question/' + question.id)= findScore(question)
+//-                 div(class='responses')
+//-                     button(class='responses-btn')
+//-                         a(class='question-link' href='/question/' + question.id)
+//-             div(class='summary')
+//-                 h3
+//-                     a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
+//-                 div(class='excerpt')= question.questionText
+//-                 div(class='tags') put tags here
+//-                 div(class='author')= question.User.userName
     

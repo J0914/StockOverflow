@@ -19,7 +19,7 @@ block content
                 div(class='stats-container')
                     div(class='vote-div')
                         div(class='votes')
-                            a(title=question.QuestionVotes[0].score href='/questions/' + question.id)= question.QuestionVotes[0].score
+                            a(href='/questions/' + question.id)= question.totalScore
                         div(class='labels') votes
                     div(class='responses-div')
                         div(class='responses')
