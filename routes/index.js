@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/models')
 const { asyncHandler } = require('./utils')
+const { Op } = require("sequelize");
 
 /* GET home page. */
 router.get('/', asyncHandler(async(req, res, next) => {
@@ -65,17 +66,27 @@ router.get('/search', asyncHandler(async (req, res) => {
   })
 
   let processedTextArray2 = processedTextArray1.filter(word => !wordListArray.includes(word));
-  let searchString = processedTextArray2.join("+")
-  // console.log(searchString);
-  //should now have an array of "important" words
-  //can query the database to find a list of related questions
-
-  //need to make a questions/query route?  Then fetch on it to have the page render with the passed in data
-  //do a fetch call to query the database /
-  const allQuestions = db.Question.findAll()
+  let searchString = processedTextArray2.join(" ")
 
 
-  res.render('search', { title: 'Search Results', searchString})
+  let queryObject = {};
+  queryObject.where = {};
+  queryObject.where[Op.or] = [];
+  queryObject.order = [['createdAt', 'DESC']];
+  queryObject.include = [{model: db.Tag}, {model: db.User}]
+
+
+  processedTextArray2.forEach(word => {
+    queryObject.where[Op.or].push({questionTitle: {[Op.iLike]: `%${word}%`}})
+    queryObject.where[Op.or].push({questionText: {[Op.iLike]: `%${word}%`}})
+  })
+
+  const allQuestions = await db.Question.findAll(queryObject);
+
+
+  // console.log("ALL QUESTIONS", allQuestions[0])
+
+  res.render('search', { title: 'Search Results', searchString, questions: allQuestions})
 }));
 
 
