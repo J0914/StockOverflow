@@ -116,10 +116,10 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 
 ## Getting Started
 
-    * git clone https://github.com/J0914/StockOverflow.git
-    * npm install
-    * npm start
-    * navigate to localhost:8080
+     git clone https://github.com/J0914/StockOverflow.git
+     npm install
+     npm start
+     navigate to localhost:8080
 
 ## Contributors
 
