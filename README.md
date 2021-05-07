@@ -96,6 +96,7 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 <img src="./public//readmeImages/askQuestion.png" width="600" height="800">></img>
 <br>
 
+
 ### Responses
 
 * Logged in users can post responses to question threads.
