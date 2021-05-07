@@ -1,16 +1,23 @@
 extends layout
 
+append head
+    link(rel='stylesheet' href='/stylesheets/search.css')
+
+
 block content
     h1= title
-    h3= searchString
-    for question in questions
-        div(class="search-result-container")
-            a(class="search-result-link" href=`/questions/${question.id}`)= `Q: ${question.questionTitle}`
-            p(class="search-result-summary")= question.questionText
-            div(class="search-result-tags-container")
-                each tag in question.Tags
-                    a(class="tag-link")
-                        div(class="tag-link-content")= tag.name
-                div(class="search-result-author-info")
-                    span= `asked ${question.createdAt} by`
-                    a(class="search-result-author-link")= question.User.userName
+    div(class="left-padding-20 width-80")
+        h3(class="gray-text small-text bottom-padding-40")= `Results for ${inputText}`
+        h3(class="large-text bottom-padding-40 gray-border-bottom")= `${questions.length} Results`
+        for question in questions
+            div(class="all-padding-10 search-result-container gray-border-bottom")
+                a(class="search-result-link blue-link-text" href=`/questions/${question.id}`)= `Q: ${question.questionTitle}`
+                p(class="search-result-summary")= question.questionText
+                div(class="search-result-meta-container")
+                    div(class="search-result-tags-container")
+                        each tag in question.Tags
+                            a(class="tag-link")
+                                div(class="tag-link-content")= tag.name
+                    div(class="search-result-author-info small-text")
+                        span(class="gray-text")= `asked ${question.createdAt} by `
+                        a(class="search-result-author-link blue-link-text")= question.User.userName
