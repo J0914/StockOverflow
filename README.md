@@ -26,7 +26,7 @@
 <details open="open">
   <summary>Table of Contents</summary>
         <li>
-        <a href="#about-the-project">About Stock Overflow</a>
+        <a href="#about-stock-overflow">About Stock Overflow</a>
         </li>
         <li>
         <a href="#features">Features</a>
