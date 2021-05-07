@@ -13,23 +13,26 @@ block content
                 a(class='blue-button' href='/questions/ask') Ask Question
             else
                 a(class='blue-button' href='/users/login') Ask Question
-    div(id='questions')
-        each question in questions
-            div(class='question-summary')
-                div(class='stats-container')
-                    div(class='vote-div')
-                        div(class='votes')
-                            a(href='/questions/' + question.id)= question.totalScore
-                        div(class='labels') votes
-                    div(class='responses-div')
-                        div(class='responses')
-                            a(title=question.Responses.length href='/questions/' + question.id)= question.Responses.length
-                        div(class='labels') responses
-                div(class='summary')
-                    h3
-                        a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
-                    div(class='tags')
-                        each tag in question.Tags
-                            a(class='question-tag' href=`/search?q=${tag.name}`)= tag.name
-                    div(class='author') by: #{question.User.userName}
+    div(class="index-container")
+        div(id='questions')
+            each question in questions
+                div(class='question-summary')
+                    div(class='stats-container')
+                        div(class='vote-div')
+                            div(class='votes')
+                                a(href='/questions/' + question.id)= question.totalScore
+                            div(class='labels') votes
+                        div(class='responses-div')
+                            div(class='responses')
+                                a(title=question.Responses.length href='/questions/' + question.id)= question.Responses.length
+                            div(class='labels') responses
+                    div(class='summary')
+                        h3
+                            a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
+                        div(class='tags')
+                            each tag in question.Tags
+                                a(class='question-tag' href=`/search?q=${tag.name}`)= tag.name
+                        div(class='author') by: #{question.User.userName}
                     //- div(class='createdAt')= question.createdAt
+        div(id="background-img-container")
+            img(class="background-img" src="/coin.gif")
