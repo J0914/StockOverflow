@@ -29,7 +29,9 @@ block content
                     h3
                         a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
                     div(class='excerpt')= question.questionText
-                    div(class='tags') put tags here
+                    div(class='tags')
+                        each tag in question.Tags
+                            div= tag.name
                     div(class='author')= question.User.userName
                     //- div(class='createdAt')= question.createdAt
 

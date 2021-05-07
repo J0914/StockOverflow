@@ -17,8 +17,27 @@ router.get('/', asyncHandler(async(req,res) => {
         }, {
             model: db.Response,
             as: 'Responses'
-        }],
+        }, {
+            model: db.Tag,
+            as: 'Tags'
+        }]
     });
+
+
+    // questions.forEach(async (question) => {
+    //     const id = question.id;
+    //     const tags = await db.QuestionTag.findAll({
+    //         include: { model: db.Question },
+    //         where: { questionId: id}
+    //     });
+    //     question['tags'] = tags;
+    // });
+
+    questions.forEach(question => {
+        question['test'] = "test";
+    })
+
+    console.log("test", questions[0].Tags[0].name);
 
     const findScore = (question) => {
         const allVotes = question.QuestionVotes;
@@ -30,7 +49,7 @@ router.get('/', asyncHandler(async(req,res) => {
         return totalScore
     }
 
-    questions.map(question => { //I think this needs to be a forEach
+    questions.forEach(question => {
         let score = findScore(question);
         question['totalScore'] = score;
     })

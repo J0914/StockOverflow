@@ -2,13 +2,14 @@ Users pw Abc123!
 {userName: 'Andrew.L', email: 'andrew@isAwesome.com', hashedPassword: '$2a$10$c1s4qxp/LYwOcpP/rZYyaOYQo0YKKAecUR09ZcYJZ.KcnybDWUTku', createdAt: new Date(), updatedAt: new Date() },
 {userName: 'Vic.T', email: 'vic@isdabest.com', hashedPassword: '$2a$10$c1s4qxp/LYwOcpP/rZYyaOYQo0YKKAecUR09ZcYJZ.KcnybDWUTku', createdAt: new Date(), updatedAt: new Date() },
 {userName: 'Jimson.M', email: 'Jimson@theAllKnowing.com', hashedPassword: '$2a$10$c1s4qxp/LYwOcpP/rZYyaOYQo0YKKAecUR09ZcYJZ.KcnybDWUTku', createdAt: new Date(), updatedAt: new Date() },
-{userName: 'Jordyn.S, email: 'Jordyn@alright.com', hashedPassword: '$2a$10$c1s4qxp/LYwOcpP/rZYyaOYQo0YKKAecUR09ZcYJZ.KcnybDWUTku', createdAt: new Date(), updatedAt: new Date() }
+{userName: 'Jordyn.S, email: 'Jordyn@alright.com', hashedPassword: '$2a$10$c1s4qxp/LYwOcpP/rZYyaOYQo0YKKAecUR09ZcYJZ.KcnybDWUTku', createdAt: new Date(), updatedAt: new Date() },
 
 Questions
-{authorId: 1, questionTitle: 'I dont know what crypto is', questionsText: 'What the heck is crypto?', createdAt: new Date(), updatedAt: new Date()},
-{authorId: 2, questionTitle: 'blockChains are awesome!', questionsText: 'Who doesn't love blockChains??', createdAt: new Date(), updatedAt: new Date()},
-{authorId: 3, questionTitle: 'I want to code some moneeyyy', questionsText: 'How do I make my own cryptocurrency?', createdAt: new Date(), updatedAt: new Date()},
-{authorId: 4, questionTitle: 'I wanna learn about cryptocurrency!', questionsText: 'How do I even get started learning about crypto?', createdAt: new Date(), updatedAt: new Date()}
+{authorId: 1, questionTitle: 'I dont know what crypto is', questionText: 'What the heck is crypto?', createdAt: new Date(), updatedAt: new Date()},
+{authorId: 2, questionTitle: 'blockChains are awesome!', questionText: 'Who doesn't love blockChains??', createdAt: new Date(), updatedAt: new Date()},
+{authorId: 3, questionTitle: 'I want to code some moneeyyy', questionText: 'How do I make my own cryptocurrency?', createdAt: new Date(), updatedAt: new Date()},
+{authorId: 4, questionTitle: 'I wanna learn about cryptocurrency!', questionText: 'How do I even get started learning about crypto?', createdAt: new Date(), updatedAt: new Date()},
+{authorId: 1, questionTitle: 'I'm very confused about crypto and blockchains help me please!', questionText: 'Honestly I don't have any idea what they mean, could someone give me a summary or an ELI5?', createdAt: new Date(), updatedAt: new Date()},
 
 Responses
 {questionId: 1, userId: 2, responseText: 'How do you not know what crypto is?', createdAt: new Date(), updatedAt: new Date()},
@@ -18,10 +19,27 @@ Responses
 
 Tags
 {name: crypto, createdAt: new Date(), updatedAt: new Date()},
-{name: blockChain, createdAt: new Date(), updatedAt: new Date()}
+{name: blockChain, createdAt: new Date(), updatedAt: new Date()},
 
 QuestionVotes
-{userId: 1, questionId: 1, score: 10, createdAt: new Date(), updatedAt: new Date()}
-{userId: 2, questionId: 2, score: 10, createdAt: new Date(), updatedAt: new Date()}
-{userId: 3, questionId: 3, score: 10, createdAt: new Date(), updatedAt: new Date()}
-{userId: 4, questionId: 4, score: 10, createdAt: new Date(), updatedAt: new Date()}
+{userId: 1, questionId: 1, score: 1, createdAt: new Date(), updatedAt: new Date()},
+{userId: 2, questionId: 1, score: -1, createdAt: new Date(), updatedAt: new Date()},
+{userId: 3, questionId: 1, score: 1, createdAt: new Date(), updatedAt: new Date()},
+{userId: 4, questionId: 1, score: -1, createdAt: new Date(), updatedAt: new Date()},
+{userId: 1, questionId: 2, score: 1, createdAt: new Date(), updatedAt: new Date()},
+{userId: 2, questionId: 2, score: 1, createdAt: new Date(), updatedAt: new Date()},
+{userId: 4, questionId: 3, score: 1, createdAt: new Date(), updatedAt: new Date()},
+{userId: 3, questionId: 3, score: -1, createdAt: new Date(), updatedAt: new Date()},
+{userId: 1, questionId: 3, score: 1, createdAt: new Date(), updatedAt: new Date()},
+{userId: 2, questionId: 3, score: 1, createdAt: new Date(), updatedAt: new Date()},
+{userId: 4, questionId: 4, score: -1, createdAt: new Date(), updatedAt: new Date()},
+{userId: 3, questionId: 4, score: 1, createdAt: new Date(), updatedAt: new Date()},
+{userId: 1, questionId: 4, score: 1, createdAt: new Date(), updatedAt: new Date()},
+
+QuestionTags
+{questionId: 1, tagId: 1, createdAt: new Date(), updatedAt: new Date()},
+{questionId: 2, tagId: 2, createdAt: new Date(), updatedAt: new Date()},
+{questionId: 3, tagId: 1, createdAt: new Date(), updatedAt: new Date()},
+{questionId: 4, tagId: 1, createdAt: new Date(), updatedAt: new Date()},
+{questionId: 5, tagId: 1, createdAt: new Date(), updatedAt: new Date()},
+{questionId: 5, tagId: 2, createdAt: new Date(), updatedAt: new Date()},
