@@ -70,15 +70,17 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 ### New Account Creation, Login, Logout, Demo Login
 
 * Users can create a new account, login, and logout!
-<br>
-<img src="./public/readmeImages/loginScreenshot.png"></img>
-<br>
-
 * Users can use a demo login to try the site!
 * Users can't ask questions or respond to questions unless they are logged in.
 * Logged in users can edit their password.
 * Logged in users can delete their account.
 
+### Login
+<br>
+<img src="./public/readmeImages/loginScreenshot.png"></img>
+<br>
+
+### Settings
 <br>
 <img src="./public/readmeImages/settings.png"></img>
 <br>
@@ -86,12 +88,13 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 ### Questions
 
 * Logged in users can ask questions which creates a new thread.
+* Logged in users can edit or delete their own Questions.
+* All users can view questions regardless of login status.
+
+## Ask a Question
 <br>
 <img src="./public//readmeImages/askQuestion.png"></img>
 <br>
-
-* Logged in users can edit or delete their own Questions.
-* All users can view questions regardless of login status.
 
 ### Responses
 
