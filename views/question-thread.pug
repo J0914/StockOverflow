@@ -17,7 +17,7 @@ block content
         div(class='response-container')
           div(class='response-content')
             div(class='response-text')= response.responseText
-            i(class='response-author') Author
+            i(class='response-author')= user.userName
     div(class='submit-response-container')
       h2 Your Response
       form(action=`/questions/${questionId}/response/submit` method="post")
