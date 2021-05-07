@@ -151,7 +151,7 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 <a href="https://github.com/victoriatarane">
     <img src="./public/readmeImages/githubLogo2.png" alt="github" width="25" height="25">
 </a>
-<a href="https://www.linkedin.com/in/victoria-tarane-54a86b5b/">
+<a href="https://www.linkedin.com/in/victoria-tarane-54a86b5b">
 <img src="./public/readmeImages/linkedinLogo2.png" alt="github" width="25" height="25">
 </a> Viktorija Tarane
 
