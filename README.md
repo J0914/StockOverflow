@@ -42,7 +42,7 @@
 
 ## About Stock Overflow
 
-<img src="./public/readmeImages/homepage.png" alt='homepage'>
+<img src="./public/readmeImages/homepage.png" alt='homepage'></img>
 
 <br>
 <br>
@@ -70,12 +70,12 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 ### New Account Creation, Login, Logout, Demo Login
 
 * Users can create a new account, login, and logout!
-<img src="./public/readmeImages/loginScreenshot.png">
+<img src="./public/readmeImages/loginScreenshot.png"></img>
 * Users can use a demo login to try the site!
 * Users can't ask questions or respond to questions unless they are logged in.
 * Logged in users can edit their password.
 * Logged in users can delete their account.
-<img src="./public/readmeImages/settings.png">
+<img src="./public/readmeImages/settings.png"></img>
 
 ### Questions
 
