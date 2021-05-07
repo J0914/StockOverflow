@@ -40,7 +40,7 @@
 </details>
 <br>
 
-<details open="open">
+<details open="open"> Collapse
 ## About Stock Overflow
 
 <img src="./public/readmeImages/homepage.png" alt='homepage'>
@@ -116,6 +116,7 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
     * navigate to localhost:8080
 
 </details>
+
 
 ## Contributors
 
