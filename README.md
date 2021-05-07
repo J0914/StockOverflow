@@ -25,10 +25,21 @@
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
-  <ol>
     <li>
-      <a href="#about-stock-overflow">About Stock Overflow</a>
+      <a href="#about-the-project">About Stock Overflow</a>
       <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#features">Features</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+    </li>
+    <li>
+      <a href="#contributors">Contributors</a>
+    </li>
 <br>
 
 ## About Stock Overflow
@@ -44,8 +55,6 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 
 * You shouldn't have to search for hours to find dedicated threads for your stock and crypto questions. Here, you have `everything you need in one place`!
 
-<br>
-
 ### Built With
 
     * Javascript
@@ -54,7 +63,7 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 
 <br>
 
-## <a href="https://github.com/J0914/StockOverflow/wiki/Feature-List"><strong>Features »</strong></a>
+## <a href="https://github.com/J0914/StockOverflow/wiki/Feature-List"><strong>Features</strong></a>
 
 ### Hosting on Heroku
 
