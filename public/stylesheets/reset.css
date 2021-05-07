@@ -26,3 +26,8 @@ body, header, nav {
 h1 {
   font-size: 2rem;
 }
+
+.username-display {
+  margin: 0px 25px !important;
+  padding: 0px 10px !important;
+}

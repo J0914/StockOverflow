@@ -5,18 +5,22 @@ const { asyncHandler } = require('./utils')
 const { Op } = require("sequelize");
 
 /* GET home page. */
-router.get('/', asyncHandler(async(req, res, next) => {
+router.get('/', asyncHandler(async (req, res, next) => {
   let questions = await db.Question.findAll({
     include: [{
       model: db.User,
       as: 'User'
-  }, {
+    }, {
       model: db.QuestionVote,
       as: 'QuestionVotes',
-  }, {
+    }, {
       model: db.Response,
       as: 'Responses'
-  }]
+    }, {
+      model: db.Tag,
+      as: 'Tags'
+    }],
+    limit: 10
   })
 
   const findScore = (question) => {
@@ -27,12 +31,12 @@ router.get('/', asyncHandler(async(req, res, next) => {
       return accum
     }, 0)
     return totalScore
-}
+  }
 
-questions.map(question => {
+  questions.map(question => {
     let score = findScore(question);
     question['totalScore'] = score;
-})
+  })
 
   res.render('index', {
     title: 'Top Questions',
@@ -59,7 +63,7 @@ router.get('/search', asyncHandler(async (req, res) => {
   let processedTextArray1 = inputTextArray.map(word => {
 
     let processedWord = word;
-    while(endingPunc.includes(processedWord[processedWord.length - 1])) {
+    while (endingPunc.includes(processedWord[processedWord.length - 1])) {
       processedWord = processedWord.slice(0, processedWord.length - 1)
     }
     return processedWord;
@@ -71,13 +75,13 @@ router.get('/search', asyncHandler(async (req, res) => {
   queryObject.where = {};
   queryObject.where[Op.or] = [];
   queryObject.order = [['createdAt', 'DESC']];
-  queryObject.include = [{model: db.Tag}, {model: db.User}]
+  queryObject.include = [{ model: db.Tag }, { model: db.User }]
   queryObject.limit = 15;
 
 
   processedTextArray2.forEach(word => {
-    queryObject.where[Op.or].push({questionTitle: {[Op.iLike]: `%${word}%`}})
-    queryObject.where[Op.or].push({questionText: {[Op.iLike]: `%${word}%`}})
+    queryObject.where[Op.or].push({ questionTitle: { [Op.iLike]: `%${word}%` } })
+    queryObject.where[Op.or].push({ questionText: { [Op.iLike]: `%${word}%` } })
   })
 
   const allQuestions = await db.Question.findAll(queryObject);
@@ -85,10 +89,12 @@ router.get('/search', asyncHandler(async (req, res) => {
 
   // console.log("ALL QUESTIONS", allQuestions[0])
 
-  res.render('search', { title: 'Search Results', inputText: inputText.toLowerCase(), questions: allQuestions})
+  res.render('search', { title: 'Search Results', inputText: inputText.toLowerCase(), questions: allQuestions })
 }));
 
-
+router.get('/footer', (req, res) => {
+  res.render('footer')
+})
 
 
 module.exports = router;

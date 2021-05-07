@@ -70,3 +70,18 @@
     background-color: red;
 }
 
+.question-tag {
+    margin: 10px;
+    background-color: #e1ecf4;
+    border-radius: 3px;
+    border: 1px solid #7aa7c7;
+    color: #39739d;
+    padding: 3px;
+    text-decoration: none;
+}
+
+h3,
+.author,
+.tags {
+    margin: 5px;
+}

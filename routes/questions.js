@@ -17,8 +17,18 @@ router.get('/', asyncHandler(async(req,res) => {
         }, {
             model: db.Response,
             as: 'Responses'
-        }],
+        }, {
+            model: db.Tag,
+            as: 'Tags'
+        }]
     });
+
+
+    questions.forEach(question => {
+        question['test'] = "test";
+    })
+
+    console.log("test", questions[0].Tags[0].name);
 
     const findScore = (question) => {
         const allVotes = question.QuestionVotes;
@@ -30,7 +40,7 @@ router.get('/', asyncHandler(async(req,res) => {
         return totalScore
     }
 
-    questions.map(question => { //I think this needs to be a forEach
+    questions.forEach(question => {
         let score = findScore(question);
         question['totalScore'] = score;
     })
@@ -42,7 +52,7 @@ router.get('/', asyncHandler(async(req,res) => {
     })
 }))
 
-router.get('/:id(\\d+)', asyncHandler(async(req, res) => { //does this need a csrfToken for the new response form...?
+router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res) => { //does this need a csrfToken for the new response form...?
     const questionId = parseInt(req.params.id, 10);
     const question = await db.Question.findByPk(questionId, {include: 'User'});
     const allResponses = await db.Response.findAll({
@@ -57,7 +67,7 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res) => { //does this need a cs
         totalScore = questionVotes[0].dataValues.score;
     } 
 
-    res.render('question-thread', { allResponses, question, totalScore, response: newResponse })
+    res.render('question-thread', { csrfToken: req.csrfToken(), allResponses, question, questionId, totalScore, response: newResponse })
 }))
 
 const questionValidators = [
@@ -141,11 +151,8 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
         let current = allScores[i];
         totalScore += current.dataValues.score;
     }
-
+    let voteScore = req.body.score;
     const userId = req.session.auth.userId;
-
-    let questionVote;
-
     const questionVotes = await db.QuestionVote.findAll({ where: {userId} });
 
     if (userId){
@@ -157,33 +164,36 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
                     hasVoted = true;
                     //!!notify user that they can not vote more than once
                 }
-                if (!hasVoted){
-                    db.QuestionVote.create({ userId, questionId, vote });
-                    totalScore += vote;
-                }
             });
         }
-    //not logged in get's redirected to log in page
+        if (!hasVoted){
+            totalScore += voteScore;
+            await db.QuestionVote.create({ userId, questionId, voteScore });
+            console.log('vote score', voteScore)
+        } else {
+            let currentVote = await db.QuestionVote.findOne({
+                where: {userId, questionId}
+            })
+            await currentVote.destroy();
+        }
     } else {
         res.redirect('/login');
     }
-
-    // const { question, allresponses, totalScore } = req.body;
-    // const question = await db.Question.build(question);
-    // console.log(question)
-//     // query vote score
-    // const totalScore = await db.QuestionVote.build(totalScore);
-    // fetch request
-    // res.json({})
-    // res.end()
-//     res.render('question-thread', { allResponses, question, totalScore, response: newResponse })
+    console.log(totalScore)
+    await res.json({ totalScore })
 }));
 
-    // if click again
-        // delete vote
-        //update score
-    //if comment
-        //update responses
 
+router.post('/:id(\\d+)/response/submit', csrfProtection, asyncHandler(async(req, res) => {
+    console.log('here');
+    const {responseText} = req.body;
+    const userId = req.session.auth.userId;
+    const questionId = req.params.id;
 
-module.exports = router
+    console.log('QuestionID', questionId)
+    await db.Response.create({responseText, userId, questionId});
+
+    res.redirect(`/questions/${questionId}`);
+}));
+
+module.exports = router;

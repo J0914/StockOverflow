@@ -28,6 +28,8 @@ block content
                 div(class='summary')
                     h3
                         a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
-                    div(class='tags') put tags here
-                    div(class='author')= question.User.userName
+                    div(class='tags')
+                        each tag in question.Tags
+                            a(class='question-tag' href=`/search?q=${tag.name}`)= tag.name
+                    div(class='author') by: #{question.User.userName}
                     //- div(class='createdAt')= question.createdAt
