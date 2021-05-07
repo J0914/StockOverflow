@@ -141,11 +141,8 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
         let current = allScores[i];
         totalScore += current.dataValues.score;
     }
-
+    let voteScore = req.body.score;
     const userId = req.session.auth.userId;
-
-    let questionVote;
-
     const questionVotes = await db.QuestionVote.findAll({ where: {userId} });
 
     if (userId){
@@ -157,33 +154,25 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
                     hasVoted = true;
                     //!!notify user that they can not vote more than once
                 }
-                if (!hasVoted){
-                    db.QuestionVote.create({ userId, questionId, vote });
-                    totalScore += vote;
-                }
             });
         }
-    //not logged in get's redirected to log in page
+        if (!hasVoted){
+            totalScore += voteScore;
+            await db.QuestionVote.create({ userId, questionId, voteScore });
+            console.log('vote score', voteScore)
+        } else {
+            let currentVote = await db.QuestionVote.findOne({
+                where: {userId, questionId}
+            })
+            await currentVote.destroy();
+        }
     } else {
         res.redirect('/login');
     }
-
-    // const { question, allresponses, totalScore } = req.body;
-    // const question = await db.Question.build(question);
-    // console.log(question)
-//     // query vote score
-    // const totalScore = await db.QuestionVote.build(totalScore);
-    // fetch request
-    // res.json({})
-    // res.end()
+    console.log(totalScore)
+    await res.json({ totalScore })
 //     res.render('question-thread', { allResponses, question, totalScore, response: newResponse })
 }));
 
-    // if click again
-        // delete vote
-        //update score
-    //if comment
-        //update responses
 
-
-module.exports = router
+module.exports = router;
