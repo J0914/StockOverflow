@@ -64,8 +64,11 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 </details>
 
 <details open="open">
-
-## <a href="https://github.com/J0914/StockOverflow/wiki/Feature-List"><strong>Features</strong></a>
+<summary>
+    <h2>
+        <a href="https://github.com/J0914/StockOverflow/wiki/Feature-List"><strong>Features</strong></a>
+    </h2>
+</summary>
 
 ### Hosting on Heroku
 
@@ -107,8 +110,9 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 <br>
 </details>
 <details open="open">
-
-## Getting Started
+<summary>
+    <h2>Getting Started</h2>
+</summary>
 
     * git clone https://github.com/J0914/StockOverflow.git
     * npm install
@@ -118,7 +122,7 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 </details>
 
 
-## Contributors
+<h2>Contributors</h2>
 
 ### The amazing developers that made this site possible!
 
