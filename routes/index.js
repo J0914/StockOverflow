@@ -19,7 +19,8 @@ router.get('/', asyncHandler(async (req, res, next) => {
     }, {
       model: db.Tag,
       as: 'Tags'
-    }]
+    }],
+    limit: 10
   })
 
   const findScore = (question) => {
