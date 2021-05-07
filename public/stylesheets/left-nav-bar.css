@@ -21,7 +21,7 @@
     font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
     text-decoration: none;
 
-    padding-bottom: 10px; 
+    padding-bottom: 10px;
 }
 
 .hoverable:hover {
@@ -43,4 +43,3 @@ ol {
     align-items: flex-start;
     right: 0;
 }
-
