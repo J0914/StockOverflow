@@ -136,8 +136,8 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 <a href="https://github.com/J0914">
     <img src="./public/readmeImages/githubLogo2.png" alt="github" width="25" height="25">
 </a>
-<a href="https://www.linkedin.com/in/jordyn-sechrist-87710b307/">
-<img src="./public/readmeImages/linkedinLogo2.png" alt="github" width="30" height="30">
+<a href="https://www.linkedin.com/in/jordyn-sechrist-87710b257/">
+<img src="./public/readmeImages/linkedinLogo2.png" alt="github" width="25" height="25">
 </a> Jordyn Sechrist
 <br>
 
@@ -152,7 +152,7 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
     <img src="./public/readmeImages/githubLogo2.png" alt="github" width="25" height="25">
 </a>
 <a href="https://www.linkedin.com/in/victoria-tarane-54a86b5b/">
-<img src="./public/readmeImages/linkedinLogo2.png" alt="github" width="30" height="30">
+<img src="./public/readmeImages/linkedinLogo2.png" alt="github" width="25" height="25">
 </a> Viktorija Tarane
 
 
