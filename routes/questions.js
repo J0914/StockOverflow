@@ -23,13 +23,6 @@ router.get('/', asyncHandler(async(req,res) => {
         }]
     });
 
-
-    questions.forEach(question => {
-        question['test'] = "test";
-    })
-
-    console.log("test", questions[0].Tags[0].name);
-
     const findScore = (question) => {
         const allVotes = question.QuestionVotes;
         const totalScore = allVotes.reduce((accum, vote) => {
