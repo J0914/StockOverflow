@@ -1,0 +1,57 @@
+.blue-link-text {
+    color:rgb(0, 149, 255);
+}
+
+.gray-text {
+    color: rgb(106, 115, 124);
+}
+
+.small-text {
+    font-size: 0.8rem;
+}
+
+.large-text {
+    font-size: 1.2rem;
+}
+
+.bottom-padding-40 {
+    padding-bottom: 40px;
+}
+
+.left-padding-20 {
+    padding-left: 20px;
+}
+
+.width-80 {
+    width: 80%;
+}
+
+.gray-border-bottom {
+    border-bottom: 1px solid rgb(239, 240, 241);
+}
+
+.all-padding-10 {
+    padding: 10px;
+}
+
+.search-result-meta-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tag-link {
+    background-color: rgb(225, 236, 244);
+    margin-right: 2px;
+
+
+}
+
+.search-result-author-info {
+    position: relative;
+    right: 0px;
+
+}
+
+.search-result-tags-container {
+
+}
