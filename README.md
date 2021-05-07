@@ -40,6 +40,7 @@
 </details>
 <br>
 
+<details open="open">
 ## About Stock Overflow
 
 <img src="./public/readmeImages/homepage.png" alt='homepage'>
@@ -60,6 +61,9 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
     * Express
 
 <br>
+</details>
+
+<details open="open">
 
 ## <a href="https://github.com/J0914/StockOverflow/wiki/Feature-List"><strong>Features</strong></a>
 
@@ -101,6 +105,8 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 * All users can click on a tag that is on a question and view a page with all questions that tag is associated with.
 
 <br>
+</details>
+<details open="open">
 
 ## Getting Started
 
@@ -108,6 +114,8 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
     * npm install
     * npm start
     * navigate to localhost:8080
+
+</details>
 
 ## Contributors
 
