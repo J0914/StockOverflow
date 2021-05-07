@@ -37,7 +37,7 @@
 
 .votes, .responses, .labels{
     display: flex;
-    justify-content: center;    
+    justify-content: center;
 }
 
 .question-summary {
@@ -47,7 +47,7 @@
     width: 100%;
     border-bottom: 1px solid #eff0f1;
     padding: 2px;
-    
+
     height: auto;
     display: flex;
     align-items: center;
@@ -84,4 +84,14 @@ h3,
 .author,
 .tags {
     margin: 5px;
+}
+
+.index-container {
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.background-img {
+    width: 80%;
+    height: auto;
 }
