@@ -24,15 +24,6 @@ router.get('/', asyncHandler(async(req,res) => {
     });
 
 
-    // questions.forEach(async (question) => {
-    //     const id = question.id;
-    //     const tags = await db.QuestionTag.findAll({
-    //         include: { model: db.Question },
-    //         where: { questionId: id}
-    //     });
-    //     question['tags'] = tags;
-    // });
-
     questions.forEach(question => {
         question['test'] = "test";
     })
@@ -76,7 +67,7 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res) => { //does this need a cs
         totalScore = questionVotes[0].dataValues.score;
     } 
 
-    res.render('question-thread', { allResponses, question, totalScore, response: newResponse })
+    res.render('question-thread', { allResponses, question, questionId, totalScore, response: newResponse })
 }))
 
 const questionValidators = [
@@ -190,8 +181,20 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
     }
     console.log(totalScore)
     await res.json({ totalScore })
-//     res.render('question-thread', { allResponses, question, totalScore, response: newResponse })
 }));
 
+
+router.post('/:id(\\d+)/response', csrfProtection, asyncHandler(async(req, res) => {
+    console.log('here')
+    const {responseText} = req.body;
+    const userId = req.session.auth.userId;
+    const questionId = req.params.id;
+
+    console.log('QuestionID', questionId)
+    await db.Response.create({responseText, userId, questionId});
+
+    res.redirect(`/${questionId}`);
+    //questions/questions/:id/response/submit
+}));
 
 module.exports = router;
