@@ -134,9 +134,14 @@ router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req,
 
 
 router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
-    const vote = req.body.score;
     const questionId = Number(req.params.id);
-    //console.log("QuestionId", questionId)
+    let allScores = await db.QuestionVote.findAll({ where: { questionId } });
+    let totalScore = 0;
+    for (let i = 0; i < allScores.length; i++){
+        let current = allScores[i];
+        totalScore += current.dataValues.score;
+    }
+
     const userId = req.session.auth.userId;
 
     let questionVote;
@@ -145,21 +150,20 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
 
     if (userId){
         let hasVoted = false;
-        // console.log('QuestionVotes', questionVotes)
+        //check if has voted
         if(questionVotes.length > 0){
             questionVotes.forEach(vote => {
                 if (vote.dataValues.questionId === questionId){
                     hasVoted = true;
+                    //!!notify user that they can not vote more than once
                 }
-                //console.log('still working?', vote.dataValues.questionId)
+                if (!hasVoted){
+                    db.QuestionVote.create({ userId, questionId, vote });
+                    totalScore += vote;
+                }
             });
         }
-        if (!hasVoted){
-            db.QuestionVote.create({ userId, questionId, vote });
-            console.log('success')
-        } else {
-            console.log('unsuccessful')
-        }
+    //not logged in get's redirected to log in page
     } else {
         res.redirect('/login');
     }
