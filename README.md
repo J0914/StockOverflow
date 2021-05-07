@@ -56,6 +56,10 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 
 ## <a href="https://github.com/J0914/StockOverflow/wiki/Feature-List"><strong>Features »</strong></a>
 
+### Hosting on Heroku
+
+* If you'd like to visit a <a href="https://github.com/J0914/StockOverflow/issues">live version of the site</a>, we are hosted on Heroku!
+
 ### New Account Creation, Login, Logout, Demo Login
 
 * Users can create a new account, login, and logout.
@@ -63,10 +67,6 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 * Users can't ask questions or respond to questions unless they are logged in.
 * Logged in users can edit their password.
 * Logged in users can delete their account.
-
-### Hosting on Heroku
-
-* If you'd like to visit a <a href="https://github.com/J0914/StockOverflow/issues">live version of the site</a>, we are hosted on Heroku!
 
 ### Questions
 
@@ -93,8 +93,38 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 * Logged in users can add tags to their questions upon creation.
 * All users can click on a tag that is on a question and view a page with all questions that tag is associated with.
 
-
 <br>
+
+## Getting Started
+
+    * git clone https://github.com/J0914/StockOverflow.git
+    * npm install
+    * npm start
+    * navigate to localhost:8080
+
+## Contributors
+
+### The amazing developers that made this site possible!
+
+    *Andrew Loeffler 
+
+<a href="https://github.com/a-loeffler">Andrew's Github</a>
+
+    *Jordyn Sechrist
+
+<a href="https://github.com/J0914">Jordyn's Github</a>
+<a href="https://www.linkedin.com/in/jordyn-sechrist-87710b207/">Jordyn's Linkedin</a>
+
+    *Jimson Ma
+
+<a href="https://github.com/jimsonm">Jimson's Github</a>
+
+    *Viktorija Tarane
+
+<a href="https://github.com/victoriatarane">Viktorija's Github</a>
+<a href="https://www.linkedin.com/in/victoria-tarane-54a86b5b/
+">Viktorija's Linkedin</a>
+
 
 
 
