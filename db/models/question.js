@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     Question.belongsTo(models.User, { foreignKey: 'authorId' });
     Question.hasMany(models.Response, { foreignKey: 'questionId' });
     Question.hasMany(models.QuestionVote, { foreignKey: 'questionId' });
+
   };
   return Question;
 };
