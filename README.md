@@ -27,9 +27,7 @@
   <summary>Table of Contents</summary>
     <li>
       <a href="#about-the-project">About Stock Overflow</a>
-      <ul>
         <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
       <a href="#features">Features</a>
