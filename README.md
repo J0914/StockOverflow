@@ -7,7 +7,7 @@
   <h3 align="center">Stock Overflow</h3>
 
   <p align="center">
-    Stock Overflow is a Stock Market themed  Stack Overflow clone. Users can ask questions regarding these topics and other users and respond to those questions and vote for questions that they felt were helpful.
+    Stock Overflow is a Stock Market themed  Stack Overflow clone. Users can ask questions, respond to questions and vote for questions that they felt were helpful.
     <br />
     <a href="https://github.com/J0914/StockOverflow"><strong>Explore the docs »</strong></a>
     <br />
