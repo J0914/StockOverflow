@@ -68,79 +68,23 @@ router.get('/search', asyncHandler(async (req, res) => {
   let processedTextArray2 = processedTextArray1.filter(word => !wordListArray.includes(word));
   let searchString = processedTextArray2.join(" ")
 
-  // [banana, mango]
-  // const searchArray = processedTextArray2.map(word =>
-  //   {questionTitle: {
-  //     Op.like: `%${word}%`}}
-  // )
 
-  // console.log([Op.like])
-  // console.log(searchString);
-  //should now have an array of "important" words
-  //can query the database to find a list of related questions
-
-  //need to make a questions/query route?  Then fetch on it to have the page render with the passed in data
-  //do a fetch call to query the database /
-
-  //do findAlls for each term in the array?
+  let queryObject = {};
+  queryObject.where = {};
+  queryObject.where[Op.or] = [];
+  queryObject.order = [['createdAt', 'DESC']];
+  queryObject.include = [{model: db.Tag}, {model: db.User}]
 
 
-  let allQuestions = [];
-
-  await processedTextArray2.forEach(async (searchWord) => {
-    let foundQuestions = await db.Question.findAll({
-      where: {
-        [Op.or]: [
-          {
-            questionTitle: {
-              [Op.like]: `%${searchWord}%`
-            }
-          },
-          {
-            questionText: {
-              [Op.like]: `%${searchWord}%`
-            }
-          }
-        ]
-      },
-      order: [
-        ['createdAt', 'DESC']
-      ]
-    })
-
-
-    for(let i = 0; i < foundQuestions.length; i++) {
-      allQuestions.push(foundQuestions[i])
-      console.log(i)
-      console.log(allQuestions)
-    }
-
-
+  processedTextArray2.forEach(word => {
+    queryObject.where[Op.or].push({questionTitle: {[Op.iLike]: `%${word}%`}})
+    queryObject.where[Op.or].push({questionText: {[Op.iLike]: `%${word}%`}})
   })
 
+  const allQuestions = await db.Question.findAll(queryObject);
 
 
-  // const allQuestions = await db.Question.findAll({
-  //   where: {
-  //     [Op.or]: [
-  //       {
-  //         questionTitle: {
-  //           [Op.like]: `%${searchString}%`
-  //         }
-  //       },
-  //       {
-  //         questionText: {
-  //           [Op.like]: `%${searchString}%`
-  //         }
-  //       }
-  //     ]
-  //   },
-  //   order: [
-  //     ['createdAt', 'DESC']
-  //   ]
-  // })
-
-  console.log("ALL QUESTIONS", allQuestions)
+  // console.log("ALL QUESTIONS", allQuestions[0])
 
   res.render('search', { title: 'Search Results', searchString, questions: allQuestions})
 }));

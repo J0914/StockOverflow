@@ -4,4 +4,13 @@ block content
     h1= title
     h3= searchString
     for question in questions
-        p= question.questionTitle
+        div(class="search-result-container")
+            a(class="search-result-link" href=`/questions/${question.id}`)= `Q: ${question.questionTitle}`
+            p(class="search-result-summary")= question.questionText
+            div(class="search-result-tags-container")
+                each tag in question.Tags
+                    a(class="tag-link")
+                        div(class="tag-link-content")= tag.name
+                div(class="search-result-author-info")
+                    span= `asked ${question.createdAt} by`
+                    a(class="search-result-author-link")= question.User.userName
