@@ -27,8 +27,8 @@ html
             button(class="hidden-submit search-submit" type="submit")
       if locals.authenticated
         .right-buttons
-          div
-              span Welcome #{user.userName}
+          div(class='username-display')
+            span Welcome #{user.userName}
           form(action='/users/logout' method='post')
             button(class='light-blue-button' type='submit') Logout
           a(href="/users/settings" class='settings-img')
@@ -50,6 +50,7 @@ html
 
       .body-content
         block content
+    block footer
     block footer
       div(class="footer-container")
           .footer-1
