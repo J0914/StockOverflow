@@ -37,6 +37,7 @@
         <li>
         <a href="#contributors">Contributors</a>
         </li>
+</details>
 <br>
 
 ## About Stock Overflow
