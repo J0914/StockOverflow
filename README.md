@@ -34,6 +34,31 @@
 
 <img src="./public/readmeImages/homepage.png" alt='homepage'>
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+<br>
+<br>
+    Cryptocurrency is exploding around the world, and people have many questions about it! This site is going to be a one-stop-shop for all of your questions regarding stocks or cryptocurrency specifically and here's why:
+
+    * `Your time is valuable,` and having a dedicated resource focused on this topic will make it easier to get your questions answered.
+
+    * You shouldn't have to search for hours to find dedicated threads for your stock and crypto questions. Here, you have `everything you need in one place`!
+
+<br>
+
+### Built With
+
+    * Javascript
+    * Pug
+    * Express
+
+## Features
+<br>
+
+
+
+
+
+
+
+
 
 
