@@ -21,7 +21,7 @@ html
           img(class="logo" src="/logo2.svg")
       .search-bar
           form(method="get" action="/search")
-            button(id="search-icon") 🔎
+            span(id="search-icon") 🔎
             input(class="search-bar-field" placeholder="Search..." name="q" type="text")
             button(class="hidden-submit search-submit" type="submit")
       if locals.authenticated
