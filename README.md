@@ -73,10 +73,12 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 <br>
 <img src="./public/readmeImages/loginScreenshot.png"></img>
 <br>
+
 * Users can use a demo login to try the site!
 * Users can't ask questions or respond to questions unless they are logged in.
 * Logged in users can edit their password.
 * Logged in users can delete their account.
+
 <br>
 <img src="./public/readmeImages/settings.png"></img>
 <br>
