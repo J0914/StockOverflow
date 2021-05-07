@@ -52,7 +52,10 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res) => { //does this need a cs
     }); 
     const newResponse = await db.Response.build();
     const questionVotes = await db.QuestionVote.findAll({ where: { questionId: question.id } });
-    const totalScore = await questionVotes[0].dataValues.score;
+    let totalScore = 0;
+    if (questionVotes.length > 0){
+        totalScore = questionVotes[0].dataValues.score;
+    } 
 
     res.render('question-thread', { allResponses, question, totalScore, response: newResponse })
 }))
@@ -133,15 +136,26 @@ router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req,
 router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
     const vote = req.body.score;
     const questionId = Number(req.params.id);
+    //console.log("QuestionId", questionId)
     const userId = req.session.auth.userId;
-    let questionVote;
-    
+    const questionVotes = await db.QuestionVote.findAll({ where: {userId} });
+    // console.log(questionVotes)
     if (userId){
-        if (questionVote === undefined){
-            totalScore += vote;
-            questionVote = db.QuestionVote.build({ userId, questionId, vote });
+        let hasVoted = false;
+        // console.log('QuestionVotes', questionVotes)
+        if(questionVotes.length > 0){
+            questionVotes.forEach(vote => {
+                if (vote.dataValues.questionId === questionId){
+                    hasVoted = true;
+                }
+                //console.log('still working?', vote.dataValues.questionId)
+            });
+        }
+        if (!hasVoted){
+            db.QuestionVote.create({ userId, questionId, vote });
+            console.log('success')
         } else {
-
+            console.log('unsuccessful')
         }
     } else {
         res.redirect('/login');
@@ -154,7 +168,7 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
     // const totalScore = await db.QuestionVote.build(totalScore);
     // fetch request 
     // res.json({})
-    res.end()
+    // res.end()
 //     res.render('question-thread', { allResponses, question, totalScore, response: newResponse })
 }));
         
