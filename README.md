@@ -91,7 +91,7 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 * Logged in users can edit or delete their own Questions.
 * All users can view questions regardless of login status.
 
-## Ask a Question
+### Ask a Question
 <br>
 <img src="./public//readmeImages/askQuestion.png"></img>
 <br>
