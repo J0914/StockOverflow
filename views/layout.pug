@@ -28,7 +28,7 @@ html
       if locals.authenticated
         .right-buttons
           div(class='username-display')
-            span Welcome #{user.userName}
+            span(class="welcome-user") Welcome #{user.userName}
           form(action='/users/logout' method='post')
             button(class='light-blue-button' type='submit') Logout
           a(href="/users/settings" class='settings-img')
