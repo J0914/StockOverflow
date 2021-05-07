@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Tags', [
       {name: 'crypto', createdAt: new Date(), updatedAt: new Date()},
-      {name: 'blockChain', createdAt: new Date(), updatedAt: new Date()}
+      {name: 'blockChain', createdAt: new Date(), updatedAt: new Date()},
     ])
     /*
       Add altering commands here.

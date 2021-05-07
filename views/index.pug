@@ -28,6 +28,6 @@ block content
                 div(class='summary')
                     h3
                         a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
-                    div(class='tags') put tags here
+                    div(class='tags') #{question.totalScore} #{question.questionTitle} #{question.test}
                     div(class='author')= question.User.userName
                     //- div(class='createdAt')= question.createdAt
