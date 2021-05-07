@@ -80,7 +80,8 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 ### Questions
 
 * Logged in users can ask questions which creates a new thread.
-<img src="./public//readmeImages/askQuestion.png">
+<img src="./public//readmeImages/askQuestion.png"></img>
+
 * Logged in users can edit or delete their own Questions.
 * All users can view questions regardless of login status.
 
