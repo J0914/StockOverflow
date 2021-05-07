@@ -52,7 +52,7 @@ router.get('/', asyncHandler(async(req,res) => {
     })
 }))
 
-router.get('/:id(\\d+)', asyncHandler(async(req, res) => { //does this need a csrfToken for the new response form...?
+router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res) => { //does this need a csrfToken for the new response form...?
     const questionId = parseInt(req.params.id, 10);
     const question = await db.Question.findByPk(questionId, {include: 'User'});
     const allResponses = await db.Response.findAll({
@@ -67,7 +67,7 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res) => { //does this need a cs
         totalScore = questionVotes[0].dataValues.score;
     } 
 
-    res.render('question-thread', { allResponses, question, questionId, totalScore, response: newResponse })
+    res.render('question-thread', { csrfToken: req.csrfToken(), allResponses, question, questionId, totalScore, response: newResponse })
 }))
 
 const questionValidators = [
@@ -184,8 +184,8 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
 }));
 
 
-router.post('/:id(\\d+)/response', csrfProtection, asyncHandler(async(req, res) => {
-    console.log('here')
+router.post('/:id(\\d+)/response/submit', csrfProtection, asyncHandler(async(req, res) => {
+    console.log('here');
     const {responseText} = req.body;
     const userId = req.session.auth.userId;
     const questionId = req.params.id;
@@ -193,8 +193,7 @@ router.post('/:id(\\d+)/response', csrfProtection, asyncHandler(async(req, res) 
     console.log('QuestionID', questionId)
     await db.Response.create({responseText, userId, questionId});
 
-    res.redirect(`/${questionId}`);
-    //questions/questions/:id/response/submit
+    res.redirect(`/questions/${questionId}`);
 }));
 
 module.exports = router;
