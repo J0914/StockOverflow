@@ -77,7 +77,7 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 
 ### Login
 <br>
-<img src="./public/readmeImages/loginScreenshot.png" width="150" height="150"></img>
+<img src="./public/readmeImages/loginScreenshot.png" width="500" height="500"></img>
 <br>
 
 ### Settings
