@@ -25,19 +25,18 @@
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
-    <li>
-      <a href="#about-the-project">About Stock Overflow</a>
-        <li><a href="#built-with">Built With</a></li>
-    </li>
-    <li>
-      <a href="#features">Features</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-    </li>
-    <li>
-      <a href="#contributors">Contributors</a>
-    </li>
+        <li>
+        <a href="#about-the-project">About Stock Overflow</a>
+        </li>
+        <li>
+        <a href="#features">Features</a>
+        </li>
+        <li>
+        <a href="#getting-started">Getting Started</a>
+        </li>
+        <li>
+        <a href="#contributors">Contributors</a>
+        </li>
 <br>
 
 ## About Stock Overflow
