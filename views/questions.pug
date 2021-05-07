@@ -30,7 +30,7 @@ block content
                         a(class ='question-link' href='/questions/' + question.id)= question.questionTitle
                     div(class='tags')
                         each tag in question.Tags
-                            a(class='question-tag' href='/users/login')= tag.name
+                            a(class='question-tag' href=`/search?q=${tag.name}`)= tag.name
                     div(class='author') by: #{question.User.userName}
                     //- div(class='createdAt')= question.createdAt
 
@@ -55,4 +55,3 @@ block content
 //-                 div(class='excerpt')= question.questionText
 //-                 div(class='tags') put tags here
 //-                 div(class='author')= question.User.userName
-    
