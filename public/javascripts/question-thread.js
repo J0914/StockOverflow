@@ -14,7 +14,10 @@ window.addEventListener("DOMContentLoaded", async () => {
                 },
                 body: JSON.stringify(body)
             });   
-                     
+            const {totalScore} = await response.json();
+            console.log(totalScore)
+            scoreDiv.innerText = totalScore;
+            return totalScore;
         }
         if (event.target.id === "downvote-button") {
             const body = { score: -1 };
@@ -25,6 +28,11 @@ window.addEventListener("DOMContentLoaded", async () => {
                 },
                 body: JSON.stringify(body)
             });
+            const { totalScore } = await response.json();
+            console.log(totalScore)
+            scoreDiv.innerText = totalScore;
+            return totalScore;
         }
+        
     });
 });
