@@ -26,9 +26,11 @@ window.addEventListener("DOMContentLoaded", async () => {
             if (counter % 2 !== 1) {
                 upvote.innerText = "▲";
                 downvote.setAttribute("class", "hidden");
+                upvote.setAttribute("class", "voting-button");
             } else {
                 upvote.innerText = "△";
                 downvote.removeAttribute("class", "hidden");
+                downvote.setAttribute("class", "voting-button");
             }
         }
         if (event.target.id === "downvote-button") {
@@ -48,9 +50,12 @@ window.addEventListener("DOMContentLoaded", async () => {
             if (counter % 2 !== 1) {
                 downvote.innerText = "▼";
                 upvote.setAttribute("class", "hidden");
+                downvote.setAttribute("class", "voting-button");
+
             } else {
                 downvote.innerText = "▽";
                 upvote.removeAttribute("class", "hidden");
+                upvote.setAttribute("class", "voting-button");
             }
         }
         
