@@ -1,8 +1,9 @@
 window.addEventListener("DOMContentLoaded", async () => {
     const upvote = document.getElementById("upvote-button");
     const downvote = document.getElementById("downvote-button");
-    
+    const responseInputField = document.getElementById("textarea");
     const scoreDiv = document.getElementById("totalScore");
+
     let score = scoreDiv.innerText;
     const questionTitleDiv = document.querySelector('.questiontitle');
     const questionId = questionTitleDiv.id;
@@ -60,4 +61,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         }
         
     });
+
+    // responseInputField.addEventListener('input', async(event) => {
+    //     const comment = await event.target;
+    //     console.log(comment);
+    // })
 });

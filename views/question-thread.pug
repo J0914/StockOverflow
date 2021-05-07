@@ -20,10 +20,10 @@ block content
             div(class='response-author')= response.userId
     div(class='submit-response-container')
       h2 Your Response
-      form(action="questions/:id/response/submit" method="post")
+      form(action=`questions/${questionId}/response/submit` method="post")
         input(type="hidden" name="_csrf" value=csrfToken)
         div
-          textarea(cols="86" rows="15" name="responseText" required value=response.responseText placeholder="Your response here...")
+          textarea(id="textarea" cols="86" rows="15" name="responseText" required value=response.responseText placeholder="Your response here...")
           div(class="response-criteria-box")
             ol(class="header") Thanks for contributing a response to Stock Overflow!
               li(class="italic text") Please be sure to answer the question.
