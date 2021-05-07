@@ -26,7 +26,7 @@
 <details open="open">
   <summary>Table of Contents</summary>
         <li>
-        <a href="#about-the-project">About Stock Overflow</a>
+        <a href="#about-stock-overflow">About Stock Overflow</a>
         </li>
         <li>
         <a href="#features">Features</a>
@@ -69,15 +69,18 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 
 ### New Account Creation, Login, Logout, Demo Login
 
-* Users can create a new account, login, and logout.
+* Users can create a new account, login, and logout!
+<img src="./public/readmeImages/loginScreenshot.png">
 * Users can use a demo login to try the site!
 * Users can't ask questions or respond to questions unless they are logged in.
 * Logged in users can edit their password.
 * Logged in users can delete their account.
+<img src="./public/readmeImages/settings.png">
 
 ### Questions
 
 * Logged in users can ask questions which creates a new thread.
+<img src="./public//readmeImages/askQuestion.png">
 * Logged in users can edit or delete their own Questions.
 * All users can view questions regardless of login status.
 
