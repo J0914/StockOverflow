@@ -4,7 +4,7 @@
     <img src="./public/logo3.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h1 align="center">Stock Overflow</h1>
+  <h3 align="center">Stock Overflow</h3>
 
   <p align="center">
     Stock Overflow is a Stock Market themed  Stack Overflow clone. Users can ask questions regarding these topics and other users and respond to those questions and vote for questions that they felt were helpful.
@@ -26,7 +26,7 @@
 <details open="open">
   <summary>Table of Contents</summary>
         <li>
-        <a href="#about-stock-overflow">About Stock Overflow</a>
+        <a href="#about-the-project">About Stock Overflow</a>
         </li>
         <li>
         <a href="#features">Features</a>
@@ -40,8 +40,7 @@
 </details>
 <br>
 
-<details open="open"> 
-<summary><h2>About Stock Overflow</h2></summary>
+## About Stock Overflow
 
 <img src="./public/readmeImages/homepage.png" alt='homepage'>
 
@@ -61,14 +60,8 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
     * Express
 
 <br>
-</details>
 
-<details open="open">
-<summary>
-    <h2>
-        <a href="https://github.com/J0914/StockOverflow/wiki/Feature-List"><strong>Features</strong></a>
-    </h2>
-</summary>
+## <a href="https://github.com/J0914/StockOverflow/wiki/Feature-List"><strong>Features</strong></a>
 
 ### Hosting on Heroku
 
@@ -108,21 +101,15 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 * All users can click on a tag that is on a question and view a page with all questions that tag is associated with.
 
 <br>
-</details>
-<details open="open">
-<summary>
-    <h2>Getting Started</h2>
-</summary>
+
+## Getting Started
 
     * git clone https://github.com/J0914/StockOverflow.git
     * npm install
     * npm start
     * navigate to localhost:8080
 
-</details>
-
-
-<h2>Contributors</h2>
+## Contributors
 
 ### The amazing developers that made this site possible!
 
