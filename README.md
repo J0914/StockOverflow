@@ -129,8 +129,8 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 ### The amazing developers that made this site possible!
 
 <a href="https://github.com/a-loeffler">
-    <img src="./public/readmeImages/githubLogo2.png" alt="github" width="25" height="25">  Andrew Loeffler
-</a>
+    <img src="./public/readmeImages/githubLogo2.png" alt="github" width="25" height="25">
+</a> Andrew Loeffler
 <br>
 
 <a href="https://github.com/J0914">
