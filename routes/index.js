@@ -88,7 +88,9 @@ router.get('/search', asyncHandler(async (req, res) => {
   res.render('search', { title: 'Search Results', inputText: inputText.toLowerCase(), questions: allQuestions})
 }));
 
-
+router.get('/footer', (req, res) => {
+  res.render('footer')
+})
 
 
 module.exports = router;

@@ -53,5 +53,6 @@
 }
 
 .search-result-tags-container {
-
+    position: relative;
+    left: 0px;
 }
