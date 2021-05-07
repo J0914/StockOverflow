@@ -52,8 +52,46 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
     * Pug
     * Express
 
+<br>
+
 ## <a href="https://github.com/J0914/StockOverflow/wiki/Feature-List"><strong>Features »</strong></a>
 
+### New Account Creation, Login, Logout, Demo Login
+
+* Users can create a new account, login, and logout.
+* Users can use a demo login to try the site!
+* Users can't ask questions or respond to questions unless they are logged in.
+* Logged in users can edit their password.
+* Logged in users can delete their account.
+
+### Hosting on Heroku
+
+* If you'd like to visit a <a href="https://github.com/J0914/StockOverflow/issues">live version of the site</a>, we are hosted on Heroku!
+
+### Questions
+
+* Logged in users can ask questions which creates a new thread.
+* Logged in users can edit or delete their own Questions.
+* All users can view questions regardless of login status.
+
+### Responses
+
+* Logged in users can post responses to question threads.
+* Logged in users can edit or delete their own responses.
+* All users can view responses regardless of login status.
+
+### Upvote and Downvote
+
+* Logged in users can upvote or downvote questions.
+
+### Search
+
+* All users can search for questions using the searchbar.
+
+### Tags
+
+* Logged in users can add tags to their questions upon creation.
+* All users can click on a tag that is on a question and view a page with all questions that tag is associated with.
 
 
 <br>
