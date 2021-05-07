@@ -106,16 +106,24 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 
 ### The amazing developers that made this site possible!
 
-<a href="https://github.com/a-loeffler">Andrew Loeffler</a>
+<!-- <a href="https://github.com/a-loeffler">Andrew Loeffler
 
-<a href="https://github.com/J0914">Jordyn Sechrist on Github</a>
-<a href="https://www.linkedin.com/in/jordyn-sechrist-87710b207/">Jordyn Sechrist on Linkedin</a>
+</a> -->
+<a href="https://github.com/a-loeffler">
+    <img src="./public/readmeImages/githubLogo.png" alt="github" width="80" height="80">
+  </a> Andrew Loeffler
+
+<!-- <a href="https://github.com/J0914">Jordyn Sechrist
+
+</a>
+
+<a href="https://www.linkedin.com/in/jordyn-sechrist-87710b207/">Jordyn Sechrist</a>
 
 <a href="https://github.com/jimsonm">Jimson Ma on Github</a>
 
 <a href="https://github.com/victoriatarane">Viktorija Tarane on Github</a>
 <a href="https://www.linkedin.com/in/victoria-tarane-54a86b5b/
-">Viktorija Tarane on Linkedin</a>
+">Viktorija Tarane on Linkedin</a> -->
 
 
 
