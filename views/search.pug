@@ -3,3 +3,5 @@ extends layout
 block content
     h1= title
     h3= searchString
+    for question in questions
+        p= question.questionTitle

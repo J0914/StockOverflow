@@ -7,7 +7,7 @@ const { check, validationResult } = require('express-validator');
 
 router.get('/', asyncHandler(async(req,res) => {
     const questions = await db.Question.findAll({
-        
+
         include: [{
             model: db.User,
             as: 'User'
@@ -19,7 +19,7 @@ router.get('/', asyncHandler(async(req,res) => {
             as: 'Responses'
         }],
     });
-    
+
     const findScore = (question) => {
         const allVotes = question.QuestionVotes;
         const totalScore = allVotes.reduce((accum, vote) => {
@@ -29,8 +29,8 @@ router.get('/', asyncHandler(async(req,res) => {
         }, 0)
         return totalScore
     }
-    
-    questions.map(question => {
+
+    questions.map(question => { //I think this needs to be a forEach
         let score = findScore(question);
         question['totalScore'] = score;
     })
@@ -49,7 +49,7 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res) => { //does this need a cs
         where: {
             questionId: questionId
         },
-    }); 
+    });
     const newResponse = await db.Response.build();
     const questionVotes = await db.QuestionVote.findAll({ where: { questionId: question.id } });
     let totalScore = 0;
@@ -138,8 +138,11 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
     const questionId = Number(req.params.id);
     //console.log("QuestionId", questionId)
     const userId = req.session.auth.userId;
+
+    let questionVote;
+
     const questionVotes = await db.QuestionVote.findAll({ where: {userId} });
-    // console.log(questionVotes)
+
     if (userId){
         let hasVoted = false;
         // console.log('QuestionVotes', questionVotes)
@@ -166,12 +169,12 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
     // console.log(question)
 //     // query vote score
     // const totalScore = await db.QuestionVote.build(totalScore);
-    // fetch request 
+    // fetch request
     // res.json({})
     // res.end()
 //     res.render('question-thread', { allResponses, question, totalScore, response: newResponse })
 }));
-        
+
     // if click again
         // delete vote
         //update score
