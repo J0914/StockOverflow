@@ -4,7 +4,7 @@
     <img src="./public/logo3.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Stock Overflow</h3>
+  <h1 align="center">Stock Overflow</h1>
 
   <p align="center">
     Stock Overflow is a Stock Market themed  Stack Overflow clone. Users can ask questions regarding these topics and other users and respond to those questions and vote for questions that they felt were helpful.
@@ -40,8 +40,10 @@
 </details>
 <br>
 
-<details open="open"> Collapse
-## About Stock Overflow
+<details open="open"> 
+<summary>
+    <h2>About Stock Overflow</h2>
+</summary>
 
 <img src="./public/readmeImages/homepage.png" alt='homepage'>
 
