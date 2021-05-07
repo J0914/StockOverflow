@@ -41,9 +41,7 @@
 <br>
 
 <details open="open"> 
-<summary>
-    <h2>About Stock Overflow</h2>
-</summary>
+<summary><h2>About Stock Overflow</h2></summary>
 
 <img src="./public/readmeImages/homepage.png" alt='homepage'>
 
