@@ -32,7 +32,7 @@
       <ul>
 </p>
 <br>
-<p>
+<p align="left">
 
 ## About The Project
 
@@ -40,11 +40,11 @@
 
 <br>
 <br>
-    Cryptocurrency is exploding around the world, and people have many questions about it! This site is going to be a one-stop-shop for all of your questions regarding stocks or cryptocurrency specifically and here's why:
+Cryptocurrency is exploding around the world, and people have many questions about it! This site is going to be a one-stop-shop for all of your questions regarding stocks or cryptocurrency specifically and here's why:
 
-    * `Your time is valuable,` and having a dedicated resource focused on this topic will make it easier to get your questions answered.
+* `Your time is valuable,` and having a dedicated resource focused on this topic will make it easier to get your questions answered.
 
-    * You shouldn't have to search for hours to find dedicated threads for your stock and crypto questions. Here, you have `everything you need in one place`!
+* You shouldn't have to search for hours to find dedicated threads for your stock and crypto questions. Here, you have `everything you need in one place`!
 
 <br>
 
