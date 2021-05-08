@@ -6,6 +6,7 @@
 }
 
 .left-navbar {
+    margin-top: 15px;
     border-right: 1px solid rgb(133, 133, 133);
     height: 100%;
     display: flex;
@@ -25,17 +26,15 @@
 }
 
 .hoverable:hover {
-    background-color: blue;
+    background-color: rgb(211, 211, 211);
     border-right: 3px solid #f48024;
+    width: 100%;
 }
 
 .li-link {
     padding-left: 10px;
 }
 
-.left-nav-public {
-    width: 100%;
-}
 
 ol {
     display: flex;
@@ -43,4 +42,5 @@ ol {
     align-items: flex-start;
     right: 0;
     height: 100%;
+    width: 100%;
 }
