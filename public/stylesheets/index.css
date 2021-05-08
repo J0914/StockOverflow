@@ -86,7 +86,7 @@ h3,
     margin: 5px;
 }
 
-.index-container {
+.index-container, .questions-content-container {
     display: grid;
     grid-template-columns: 70% 30%;
 }
