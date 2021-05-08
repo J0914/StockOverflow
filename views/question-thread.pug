@@ -2,41 +2,42 @@ extends layout
 
 block content
   script(type="text/javascript" src="/javascripts/question-thread.js")
-  div(class='question')
-    h1(id=question.id class='questiontitle')= question.questionTitle
-    div(class='side-to-side')
-      div(id='voting-div' class='question-voting')
-        button(id='upvote-button' class='voting-button') △
-        h2(id='totalScore' class='votes')= totalScore 
-        button(id='downvote-button' class='voting-button') ▽
-      div(class='question-text')= question.questionText
-    i(class='question-author')= question.User.userName
-    h3= `${allResponses.length} Responses`
-      div(class='responses')
-        each response in allResponses
-          div(class='side-to-side')
-            div(id='voting-div' class='response-voting')
-              button(id='upvote-response-button' class='voting-response-button') △
-              h2(id='totalRespScore' class='respVotes')= totalScore 
-              button(id='downvote-response-button' class='voting-response-button') ▽
-            div(class='response-container')
-              div(class='response-content')
-                div(class='response-text')= response.responseText
-                i(class='response-author')= user.userName
-    div(class='submit-response-container')
-      h2 Your Response
-      form(action=`/questions/${questigit onId}/response/submit` method="post")
-        input(type="hidden" name="_csrf" value=csrfToken)
-        div
-          textarea(id="textarea" cols="86" rows="15" name="responseText" required value=response.responseText placeholder="Your response here...")
-          div(class="response-criteria-box")
-            ol(class="header") Thanks for contributing a response to Stock Overflow!
-              li(class="italic text") Please be sure to answer the question.
-              li(class="italic text") Provide details and share your research!
-              li(class="italic text") But try to avoid...
-                div
-                  ul
-                    li(class="italic text indent") Asking for help, clarification, or responding to other answers.
-                    li(class="italic text indent") Making statements based on opinion; back them up with references, documentation, or personal experience.
-        button(class="blue-button" type="submit") Post Your Answer
-//- hm
+  body(id='body')
+      div(class='question login-form')
+        h1(id=question.id class='questiontitle')= question.questionTitle
+        div(class='side-to-side')
+          div(id='voting-div' class='question-voting')
+            button(id='upvote-button' class='voting-button') △
+            h2(id='totalScore' class='votes')= totalScore 
+            button(id='downvote-button' class='voting-button') ▽
+          div(class='question-text')= question.questionText
+        i(class='question-author')= question.User.userName
+      div(class='question')
+        h3= `${allResponses.length} Responses`
+          div(class='responses')
+            each response in allResponses
+              div(class='side-to-side login-form')
+                div(id='voting-div' class='response-voting')
+                  button(id=`upvote-response-buttonW${response.id}` class='voting-response-button') △
+                  h2(id='totalRespScore' class='respVotes')= totalScore 
+                  button(id=`downvote-response-buttonW${response.id}` class='voting-response-button') ▽
+                div(class='response-container')
+                  div(class='response-content')
+                    div(class='response-text' id=`${response.id}`)= response.responseText
+                    i(class='response-author')= user.userName
+      div(class='submit-response-container login-form')
+        h2 Your Response
+        form(action=`/questions/${questionId}/response/submit` method="post")
+          input(type="hidden" name="_csrf" value=csrfToken)
+          div
+            textarea(id="textarea" cols="86" rows="15" name="responseText" required value=response.responseText placeholder="Your response here...")
+            div(class="response-criteria-box")
+              ol(class="header") Thanks for contributing a response to Stock Overflow!
+                li(class="italic text") Please be sure to answer the question.
+                li(class="italic text") Provide details and share your research!
+                li(class="italic text") But try to avoid...
+                  div
+                    ul
+                      li(class="italic text indent") Asking for help, clarification, or responding to other answers.
+                      li(class="italic text indent") Making statements based on opinion; back them up with references, documentation, or personal experience.
+          button(class="blue-button" type="submit") Post Your Answer

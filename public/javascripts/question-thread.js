@@ -1,7 +1,6 @@
 window.addEventListener("DOMContentLoaded", async () => {
     const upvote = document.getElementById("upvote-button");
     const downvote = document.getElementById("downvote-button");
-    const responseInputField = document.getElementById("textarea");
     const scoreDiv = document.getElementById("totalScore");
 
     let score = scoreDiv.innerText;
@@ -62,8 +61,72 @@ window.addEventListener("DOMContentLoaded", async () => {
         
     });
 
-    // responseInputField.addEventListener('input', async(event) => {
-    //     const comment = await event.target;
-    //     console.log(comment);
-    // })
+
+
+
+    const upvoteRes = document.getElementById("upvote-response-button");
+    const downvoteRes = document.getElementById("downvote-response-button");
+    const scoreDivRes = document.getElementById("totalRespScore");
+    //const responseTextDiv = document.querySelector('.response-text');
+    // const responseTextDiv = document.querySelector('.response-text');
+    // let responseId = responseTextDiv.id;
+    
+    const voteDivRes = document.querySelector(".response-voting");
+    let counterRes = 1;
+
+
+    voteDivRes.addEventListener('click', async (event) => {
+        if (event.target.id.includes("upvote")) {
+            let temp = event.target.id.split('W')[1];
+            let responseId = Number(temp);
+            const bodyRes = { scoreRes: 1, responseId };
+            const res = await fetch(`:id(\\d+)/response/${responseId}/vote`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json',
+                },
+                bodyRes: await JSON.stringify(bodyRes)
+            });
+            const {totalResScore} = await res.json();
+            console.log(totalResScore)
+            scoreDivRes.innerText = await totalResScore;
+            counterRes++;
+            if (counterRes % 2 !== 1) {
+                upvoteRes.innerText = "▲";
+                downvoteRes.setAttribute("class", "hidden");
+                upvoteRes.setAttribute("class", "voting-response-button");
+            } else {
+                upvoteRes.innerText = "△";
+                downvoteRes.removeAttribute("class", "hidden");
+                downvoteRes.setAttribute("class", "voting-response-button");
+            }
+        }
+        if (event.target.id.includes("downvote")) {
+            let temp = await event.target.id.split('W')[1];
+            let responseId = Number(temp);
+            const bodyRes = { scoreRes: -1, responseId };
+            const response = await fetch(`:id(\\d+)/response/${responseId}/vote`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json',
+                },
+                bodyRes: JSON.stringify(bodyRes)
+            });
+            const { totalResScore } = await response.json();
+            console.log(totalResScore)
+            scoreDiv.innerText = totalResScore;
+            counterRes++;
+            if (counterRes % 2 !== 1) {
+                downvoteRes.innerText = "▼";
+                upvoteRes.setAttribute("class", "hidden");
+                downvoteRes.setAttribute("class", "voting-response-button");
+
+            } else {
+                downvoteRes.innerText = "▽";
+                upvoteRes.removeAttribute("class", "hidden");
+                upvoteRes.setAttribute("class", "voting-response-button");
+            }
+        }
+
+    });
 });

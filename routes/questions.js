@@ -196,4 +196,46 @@ router.post('/:id(\\d+)/response/submit', csrfProtection, asyncHandler(async(req
     res.redirect(`/questions/${questionId}`);
 }));
 
+router.post(':id(\\d+)/response/:id(\\d+)/vote', asyncHandler(async (req, res) => {
+    console.log('here')
+    const responseId = req.bodyRes.responseId;
+    console.log(responseId)
+    let allScores = await db.ResponseVote.findAll({ where: { responseId } });
+    let totalResScore = 0;
+    for (let i = 0; i < allScores.length; i++) {
+        let current = allScores[i];
+        totalResScore += current.dataValues.score;
+    }
+    let voteScore = req.body.scoreRes;
+    const userId = req.session.auth.userId;
+    const responseVotes = await db.ResponseVote.findAll({ where: { userId } });
+
+    if (userId) {
+        let hasVoted = false;
+        //check if has voted
+        if (responseVotes.length > 0) {
+            responseVotes.forEach(vote => {
+                if (vote.dataValues.responseId === responseId) {
+                    hasVoted = true;
+                    //!!notify user that they can not vote more than once
+                }
+            });
+        }
+        if (!hasVoted) {
+            totalResScore += voteScore;
+            await db.ResponseVote.create({ userId, responseId, voteScore });
+            console.log('vote score', voteScore)
+        } else {
+            let currentVote = await db.ResponseVote.findOne({
+                where: { userId, responseId }
+            })
+            await currentVote.destroy();
+        }
+    } else {
+        res.redirect('/login');
+    }
+    console.log(totalResScore)
+    await res.json({ totalResScore })
+}));
+
 module.exports = router;
