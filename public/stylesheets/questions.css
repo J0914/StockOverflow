@@ -63,6 +63,21 @@ h3 {
     margin-right: 10px;
 }
 
+.response-voting {
+    display: flex;
+    flex-direction: column;
+    width: 2%;
+    margin-right: 5px;
+}
+
+.voting-response-button {
+    font-size: 9px;
+    width: 25px;
+    height: 25px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 .votes {
     display: flex;
     justify-content: center;
@@ -95,6 +110,18 @@ h3 {
     display: flex;
     justify-content: flex-end;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.response-container {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.respVotes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
  /* 🔼
     🔽

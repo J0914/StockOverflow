@@ -12,12 +12,17 @@ block content
       div(class='question-text')= question.questionText
     i(class='question-author')= question.User.userName
     h3= `${allResponses.length} Responses`
-    div(class='responses')
-      each response in allResponses
-        div(class='response-container')
-          div(class='response-content')
-            div(class='response-text')= response.responseText
-            i(class='response-author')= user.userName
+      div(class='responses')
+        each response in allResponses
+          div(class='side-to-side')
+            div(id='voting-div' class='response-voting')
+              button(id='upvote-response-button' class='voting-response-button') △
+              h2(id='totalRespScore' class='respVotes')= totalScore 
+              button(id='downvote-response-button' class='voting-response-button') ▽
+            div(class='response-container')
+              div(class='response-content')
+                div(class='response-text')= response.responseText
+                i(class='response-author')= user.userName
     div(class='submit-response-container')
       h2 Your Response
       form(action=`/questions/${questionId}/response/submit` method="post")
