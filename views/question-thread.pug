@@ -25,7 +25,7 @@ block content
                 i(class='response-author')= user.userName
     div(class='submit-response-container')
       h2 Your Response
-      form(action=`/questions/${questionId}/response/submit` method="post")
+      form(action=`/questions/${questigit onId}/response/submit` method="post")
         input(type="hidden" name="_csrf" value=csrfToken)
         div
           textarea(id="textarea" cols="86" rows="15" name="responseText" required value=response.responseText placeholder="Your response here...")
