@@ -1,6 +1,16 @@
 #tags {
-    background-color: red;
+    background-color: rgb(230, 230, 230);
     margin: 50px;
-    border: 1px solid black;
+    border: 1px solid gray;
     padding: 25px;
+    width: 70%;
+    border-radius: 7px;
+}
+
+#tag-description {
+    margin: 20px;
+}
+
+#tag-paragraph {
+    padding: 20px;
 }

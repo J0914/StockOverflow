@@ -8,8 +8,9 @@ block content
     div(class='h1')
         h1= title 
         
-    p A tag is a keyword or label that categorizes your question with other, similar questions. Using the right tags makes it easier for others to find and answer your question.
+    p(id='tag-paragraph') A tag is a keyword or label that categorizes your question with other, similar questions. Using the right tags makes it easier for others to find and answer your question.
     div
         each tag in tags
             div(id='tags')
                 a(class='question-tag' href=`/search?q=${tag.name}`)= tag.name
+                div(id='tag-description')= tag.description
