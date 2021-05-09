@@ -1,16 +1,25 @@
-#tags {
+.each-tag {
     background-color: rgb(230, 230, 230);
-    margin: 50px;
     border: 1px solid gray;
     padding: 25px;
-    width: 70%;
+    width: 90%;
     border-radius: 7px;
+    margin: 20px;
 }
 
 #tag-description {
     margin: 20px;
+    font-size: 13px;
 }
 
 #tag-paragraph {
     padding: 20px;
+    width: 75%;
+}
+
+.tag-content-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 75%;
+    padding-left: 10px;
 }
