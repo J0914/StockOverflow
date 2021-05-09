@@ -64,8 +64,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
 
-    const upvoteRes = document.getElementById("upvote-response-button");
-    const downvoteRes = document.getElementById("downvote-response-button");
+    const upvoteRes = document.querySelector(".upvote-resbutton");
+    const downvoteRes = document.querySelector(".downvote-resbutton");
     const scoreDivRes = document.getElementById("totalRespScore");
     //const responseTextDiv = document.querySelector('.response-text');
     // const responseTextDiv = document.querySelector('.response-text');
@@ -79,18 +79,19 @@ window.addEventListener("DOMContentLoaded", async () => {
         if (event.target.id.includes("upvote")) {
             let temp = event.target.id.split('W')[1];
             let responseId = Number(temp);
-            const bodyRes = { scoreRes: 1, responseId };
-            const res = await fetch(`:id(\\d+)/response/${responseId}/vote`, {
+            const body = { scoreRes: 1, responseId };
+            const res = await fetch(`${questionId}/vote`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json',
                 },
-                bodyRes: await JSON.stringify(bodyRes)
+                body: await JSON.stringify(body)
             });
             const {totalResScore} = await res.json();
             console.log(totalResScore)
             scoreDivRes.innerText = await totalResScore;
             counterRes++;
+            console.log(counterRes)
             if (counterRes % 2 !== 1) {
                 upvoteRes.innerText = "▲";
                 downvoteRes.setAttribute("class", "hidden");
@@ -104,17 +105,17 @@ window.addEventListener("DOMContentLoaded", async () => {
         if (event.target.id.includes("downvote")) {
             let temp = await event.target.id.split('W')[1];
             let responseId = Number(temp);
-            const bodyRes = { scoreRes: -1, responseId };
-            const response = await fetch(`:id(\\d+)/response/${responseId}/vote`, {
+            const body = { scoreRes: -1, responseId };
+            const response = await fetch(`${questionId}/vote`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json',
                 },
-                bodyRes: JSON.stringify(bodyRes)
+                body: await JSON.stringify(body)
             });
             const { totalResScore } = await response.json();
             console.log(totalResScore)
-            scoreDiv.innerText = totalResScore;
+            scoreDivRes.innerText = await totalResScore;
             counterRes++;
             if (counterRes % 2 !== 1) {
                 downvoteRes.innerText = "▼";

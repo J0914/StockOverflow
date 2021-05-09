@@ -18,9 +18,9 @@ block content
             each response in allResponses
               div(class='side-to-side login-form')
                 div(id='voting-div' class='response-voting')
-                  button(id=`upvote-response-buttonW${response.id}` class='voting-response-button') △
+                  button(id=`upvote-response-buttonW${response.id}` class='voting-response-button upvote-resbutton') △
                   h2(id='totalRespScore' class='respVotes')= totalScore 
-                  button(id=`downvote-response-buttonW${response.id}` class='voting-response-button') ▽
+                  button(id=`downvote-response-buttonW${response.id}` class='voting-response-button downvote-resbutton') ▽
                 div(class='response-container')
                   div(class='response-content')
                     div(class='response-text' id=`${response.id}`)= response.responseText
