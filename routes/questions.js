@@ -56,6 +56,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
     const questionId = parseInt(req.params.id, 10);
     const question = await db.Question.findByPk(questionId, { include: 'User' });
     const allResponses = await db.Response.findAll({
+        include: {model: db.User},
         where: {
             questionId: questionId
         },
