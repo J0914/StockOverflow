@@ -80,6 +80,11 @@
     text-decoration: none;
 }
 
+.question-tag:hover{
+    background-color: rgb(209, 229, 241);
+    color: rgb(44, 87, 119);
+}
+
 h3,
 .author,
 .tags {
@@ -94,4 +99,14 @@ h3,
 .background-img {
     width: 80%;
     height: auto;
+}
+
+.question-link {
+    color: rgb(0, 149, 255);
+    text-decoration: none;
+    padding-left: 10px;
+}
+
+.author {
+    padding-left: 10px;
 }

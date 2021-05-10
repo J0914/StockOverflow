@@ -2,13 +2,14 @@ extends layout
 
 block content
   script(type="text/javascript" src="/javascripts/question-thread.js")
+
   body(id='body')
       div(class='question login-form')
         h1(id=question.id class='questiontitle')= question.questionTitle
         div(class='side-to-side')
           div(id='voting-div' class='question-voting')
             button(id='upvote-button' class='voting-button') △
-            h2(id='totalScore' class='votes')= totalScore 
+            h2(id='totalScore' class='votes')= totalScore
             button(id='downvote-button' class='voting-button') ▽
           div(class='question-text')= question.questionText
         i(class='question-author')= question.User.userName
@@ -28,6 +29,12 @@ block content
       div(class='submit-response-container login-form')
         h2 Your Response
         form(action=`/questions/${questionId}/response/submit` method="post")
+          if errors
+            div(class='alert alert-danger' role='alert')
+                p The following error(s) occurred:
+                ul
+                    each error in errors
+                        li(class="alert-danger li-margin-class")= error
           input(type="hidden" name="_csrf" value=csrfToken)
           div
             textarea(id="textarea" cols="86" rows="15" name="responseText" required value=response.responseText placeholder="Your response here...")

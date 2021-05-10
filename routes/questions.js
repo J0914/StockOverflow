@@ -56,6 +56,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
     const questionId = parseInt(req.params.id, 10);
     const question = await db.Question.findByPk(questionId, { include: 'User' });
     const allResponses = await db.Response.findAll({
+        include: {model: db.User},
         where: {
             questionId: questionId
         },
@@ -234,13 +235,26 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
 router.post('/:id(\\d+)/response/submit', csrfProtection, asyncHandler(async (req, res) => {
     console.log('here');
     const { responseText } = req.body;
-    const userId = req.session.auth.userId;
+
     const questionId = req.params.id;
 
-    console.log('QuestionID', questionId)
-    await db.Response.create({ responseText, userId, questionId });
+    if(req.session.auth) {
+        const userId = req.session.auth.userId;
 
-    res.redirect(`/questions/${questionId}`);
+
+
+        console.log('QuestionID', questionId)
+        await db.Response.create({ responseText, userId, questionId });
+
+        res.redirect(`/questions/${questionId}`);
+    } else {
+        errors = ["You must be logged in to submit a response"]
+
+        const response = db.Response.build({responseText, questionId})
+        res.redirect(`/questions/${questionId}`, {csrfToken: req.csrfToken(), errors, response})
+    }
+
+
 }));
 
 
