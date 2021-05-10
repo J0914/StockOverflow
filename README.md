@@ -81,6 +81,7 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 * Logged in users can edit their password.
 * Logged in users can delete their account.
 <br>
+
 ### Login
 <br>
 <p align="center">
@@ -88,6 +89,7 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 <br>
 </p>
 <br>
+
 ### Settings
 <br>
 <p align="center">
