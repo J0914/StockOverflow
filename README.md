@@ -80,14 +80,14 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 * Users can't ask questions or respond to questions unless they are logged in.
 * Logged in users can edit their password.
 * Logged in users can delete their account.
-
+<br>
 ### Login
 <br>
 <p align="center">
 <img src="./public/readmeImages/loginScreenshot.png" width="600" height="500"></img>
 <br>
 </p>
-
+<br>
 ### Settings
 <br>
 <p align="center">
@@ -100,7 +100,7 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 * Logged in users can ask questions which creates a new thread.
 * Logged in users can edit or delete their own Questions.
 * All users can view questions regardless of login status.
-
+<br>
 ### Ask a Question
 <br>
 <p align="center">
