@@ -42,7 +42,7 @@
 
 ## About Stock Overflow
 
-<img src="./public/readmeImages/database-schema.png" alt='homepage'></img>
+<img src="./public/readmeImages/homepage.png" alt='homepage'></img>
 
 <br>
 <br>
@@ -64,8 +64,8 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 ### Database Schema
 <br>
 
-<img href='./public/readmeImages/database-schema.png'>
-<br>
+<img src="./public/readmeImages/database-schema.png" alt='homepage'></img>
+
 
 ## <a href="https://github.com/J0914/StockOverflow/wiki/Feature-List"><strong>Features</strong></a>
 
