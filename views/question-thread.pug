@@ -17,15 +17,15 @@ block content
         h3= `${allResponses.length} Responses`
           div(class='responses')
             each response in allResponses
-              div(class='side-to-side login-form')
+              div(id="vote-listener" class='side-to-side login-form')
                 div(id='voting-div' class='response-voting')
                   button(id=`upvote-response-buttonW${response.id}` class='voting-response-button upvote-resbutton') △
-                  h2(id='totalRespScore' class='respVotes')= totalScore
+                  h2(id=`totalRespScore${response.id}` class=`respVotes`)= totalScore 
                   button(id=`downvote-response-buttonW${response.id}` class='voting-response-button downvote-resbutton') ▽
                 div(class='response-container')
                   div(class='response-content')
                     div(class='response-text' id=`${response.id}`)= response.responseText
-                    i(class='response-author')= response.userId.userName
+                    i(class='response-author')= response.User.userName
       div(class='submit-response-container login-form')
         h2 Your Response
         form(action=`/questions/${questionId}/response/submit` method="post")

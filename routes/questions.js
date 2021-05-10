@@ -60,6 +60,9 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
         where: {
             questionId: questionId
         },
+        include: {
+            model: db.User
+        }
     });
     const newResponse = await db.Response.build();
     const questionVotes = await db.QuestionVote.findAll({ where: { questionId: question.id } });
@@ -147,11 +150,11 @@ router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req,
 
 router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
     const questionId = Number(req.params.id);
-    // console.log(req.body.responseId)
+    //console.log(req.body.responseId)
     const responseId = req.body.responseId;
     if (responseId !== undefined) {
-        console.log('here')
-        console.log(responseId)
+        //console.log('here')
+        //console.log(responseId)
         let allScores = await db.ResponseVote.findAll({ where: { responseId } });
         let totalResScore = 0;
         for (let i = 0; i < allScores.length; i++) {
@@ -184,7 +187,7 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
                 await currentVote.destroy();
             }
         } else {
-            res.redirect('/login');
+            console.error('Please log in!')
         }
         console.log(totalResScore)
         await res.json({ totalResScore })
@@ -221,9 +224,9 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
                 await currentVote.destroy();
             }
         } else {
-            res.redirect('/login');
+            console.error('Please log in!')
         }
-        console.log(totalScore);
+        //console.log(totalScore);
         await res.json({ totalScore });
     }
 }));
