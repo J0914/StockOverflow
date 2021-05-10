@@ -42,7 +42,7 @@
 
 ## About Stock Overflow
 
-<img src="./public/readmeImages/homepage.png" alt='homepage'></img>
+<img src="./public/readmeImages/database-schema.png" alt='homepage'></img>
 
 <br>
 <br>
