@@ -2,6 +2,7 @@ extends layout
 
 append head
     link(rel='stylesheet' href='/stylesheets/search.css')
+    link(rel="stylesheet" href="/stylesheets/index.css")
 
 
 block content
@@ -16,8 +17,8 @@ block content
                 div(class="search-result-meta-container")
                     div(class="search-result-tags-container")
                         each tag in question.Tags
-                            a(class="tag-link")
-                                div(class="tag-link-content")= tag.name
+                            div(class="search-result-tag")
+                                a(class='question-tag' href=`/search?q=${tag.name}`)= tag.name
                     div(class="search-result-author-info small-text")
                         span(class="gray-text")= `asked ${question.createdAt} by `
                         a(class="search-result-author-link blue-link-text")= question.User.userName

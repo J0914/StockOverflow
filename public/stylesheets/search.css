@@ -55,4 +55,9 @@
 .search-result-tags-container {
     position: relative;
     left: 0px;
+    display: grid;
+    grid-template-columns: max-content max-content max-content;
+}
+.search-result-tag {
+    margin-bottom: 10px;
 }
