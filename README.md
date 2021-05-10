@@ -64,7 +64,7 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 ### Database Schema
 <br>
 
-<img href='./public/readmeImages/database-schema.png'>
+<img src="./public/readmeImages/database-schema.png" alt='homepage'></img>
 <br>
 
 ## <a href="https://github.com/J0914/StockOverflow/wiki/Feature-List"><strong>Features</strong></a>
