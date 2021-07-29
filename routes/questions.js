@@ -60,18 +60,53 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
         where: {
             questionId: questionId
         },
-        include: {
-            model: db.User
-        }
+        include: [
+            {model: db.User}, 
+            {model: db.ResponseVote}
+        ]
     });
     const newResponse = await db.Response.build();
     const questionVotes = await db.QuestionVote.findAll({ where: { questionId: question.id } });
+    
+    //allResponses has an array of all the responses for this question;
+    //  Each response includes all the votes for it
+
+    allResponses.forEach(response => {
+        let voteTally = 0;
+
+        response.dataValues.ResponseVotes.forEach(vote => {
+            voteTally += vote.dataValues.score;
+        })
+
+        response.dataValues.resTotalScore = voteTally;
+    })
+
+
+    console.log("Check the ResponseVotes..............==>", allResponses[0].dataValues.resTotalScore)
+
+    
+    let userId = req.session.auth.userId
+    let userScore = 0;
+
+    console.log("User Score ==========>", userScore, "<==============")
+
+    questionVotes.forEach(vote => {
+        if (vote.userId === userId) {
+            userScore = vote.score;
+        }
+    })
+
+
     let totalScore = 0;
     if (questionVotes.length > 0) {
-        totalScore = questionVotes[0].dataValues.score;
+        questionVotes.forEach(vote => {
+            totalScore += vote.dataValues.score
+        })
     }
 
-    res.render('question-thread', { csrfToken: req.csrfToken(), allResponses, question, questionId, totalScore, response: newResponse })
+    console.log("totalScore ~~~~~~~~~~~~~~~~~~~~~~>", totalScore, "<~~~~~~~~~~~~~~~~~~~~~~")
+
+    res.render('question-thread', { csrfToken: req.csrfToken(), allResponses, question, questionId, totalScore, response: newResponse, userScore })
 }))
 
 const questionValidators = [
@@ -149,6 +184,8 @@ router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req,
 
 
 router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
+    
+
     const questionId = Number(req.params.id);
     //console.log(req.body.responseId)
     const responseId = req.body.responseId;
@@ -163,6 +200,7 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
         }
         let voteScore = req.body.scoreRes;
         const userId = req.session.auth.userId;
+        //line 169 is votes the current user has made; need to check this to prevent multiple voting
         const responseVotes = await db.ResponseVote.findAll({ where: { userId } });
 
         if (userId) {
@@ -198,8 +236,10 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
             let current = allScores[i];
             totalScore += current.dataValues.score;
         }
+        
         let voteScore = req.body.score;
         const userId = req.session.auth.userId;
+        //this can probably get optimized
         const questionVotes = await db.QuestionVote.findAll({ where: { userId } });
 
         if (userId) {
@@ -213,11 +253,12 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
                     }
                 });
             }
-            if (!hasVoted) {
+            if (hasVoted === false) {
                 totalScore += voteScore;
-                await db.QuestionVote.create({ userId, questionId, voteScore });
+                await db.QuestionVote.create({ userId, questionId, score: voteScore });
                 console.log('vote score', voteScore)
             } else {
+                totalScore -= voteScore;
                 let currentVote = await db.QuestionVote.findOne({
                     where: { userId, questionId }
                 })
@@ -230,6 +271,16 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
         await res.json({ totalScore });
     }
 }));
+
+
+router.post('/:id(\\d+)/response/:responseId(\\d+)/vote', asyncHandler(async (req, res, next) => {
+
+    const responseId = parseInt(req.params.responseId, 10);
+
+    console.log(responseId)
+
+
+}))
 
 
 router.post('/:id(\\d+)/response/submit', csrfProtection, asyncHandler(async (req, res) => {

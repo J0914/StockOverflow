@@ -8,10 +8,20 @@ window.addEventListener("DOMContentLoaded", async () => {
     const questionId = questionTitleDiv.id;
     const voteDiv = document.getElementById("voting-div");
     let counter = 1;
+
+    let voted = false;
+
+    if (upvote.innerHTML === "▲" || downvote.innerHTML === "▼") {
+        voted = true
+    }
+
+    console.log("has user initially voted?", voted)
+
     voteDiv.addEventListener('click', async (event) => {
+
         if (event.target.id === "upvote-button") {
-
             const body = { score: 1 };
+
             const response = await fetch(`${questionId}/vote`, {
                 method: 'POST',
                 headers: {
@@ -22,20 +32,23 @@ window.addEventListener("DOMContentLoaded", async () => {
             const { totalScore } = await response.json();
             //console.log(totalScore)
             scoreDiv.innerText = totalScore;
-            counter++;
-            if (counter % 2 !== 1) {
-                upvote.innerText = "▲";
-                downvote.setAttribute("class", "hidden");
-                upvote.setAttribute("class", "voting-button");
+
+            voted = !voted;
+            console.log("did I vote now?", voted)
+
+            if(voted === true) {
+                upvote.innerHTML = "▲";
+                downvote.classList.add("hidden");
+                
             } else {
-                upvote.innerText = "△";
-                downvote.removeAttribute("class", "hidden");
-                downvote.setAttribute("class", "voting-button");
+                upvote.innerHTML = "△";
+                downvote.classList.remove("hidden")
             }
         }
+
         if (event.target.id === "downvote-button") {
-
             const body = { score: -1 };
+
             const response = await fetch(`${questionId}/vote`, {
                 method: 'POST',
                 headers: {
@@ -46,20 +59,75 @@ window.addEventListener("DOMContentLoaded", async () => {
             const { totalScore } = await response.json();
             //console.log(totalScore)
             scoreDiv.innerText = totalScore;
-            counter++;
-            if (counter % 2 !== 1) {
-                downvote.innerText = "▼";
-                upvote.setAttribute("class", "hidden");
-                downvote.setAttribute("class", "voting-button");
 
+            voted = !voted;
+            console.log("did I vote now?", voted)
+
+            if(voted === true) {
+                downvote.innerHTML = "▼";
+                upvote.classList.add("hidden");
+                
             } else {
-                downvote.innerText = "▽";
-                upvote.removeAttribute("class", "hidden");
-                upvote.setAttribute("class", "voting-button");
+                downvote.innerHTML = "▽";
+                upvote.classList.remove("hidden")
             }
         }
 
-    });
+    })
+
+
+    // voteDiv.addEventListener('click', async (event) => {
+    //     if (event.target.id === "upvote-button") {
+
+    //         const body = { score: 1 };
+    //         const response = await fetch(`${questionId}/vote`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 "Content-Type": 'application/json',
+    //             },
+    //             body: JSON.stringify(body)
+    //         });
+    //         const { totalScore } = await response.json();
+    //         //console.log(totalScore)
+    //         scoreDiv.innerText = totalScore;
+    //         counter++;
+    //         if (counter % 2 !== 1) {
+    //             upvote.innerText = "▲";
+    //             downvote.setAttribute("class", "hidden");
+    //             upvote.setAttribute("class", "voting-button");
+    //         } else {
+    //             upvote.innerText = "△";
+    //             downvote.removeAttribute("class", "hidden");
+    //             downvote.setAttribute("class", "voting-button");
+    //         }
+    //     }
+    //     if (event.target.id === "downvote-button") {
+
+    //         const body = { score: -1 };
+    //         const response = await fetch(`${questionId}/vote`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 "Content-Type": 'application/json',
+    //             },
+    //             body: JSON.stringify(body)
+    //         });
+    //         const { totalScore } = await response.json();
+    //         //console.log(totalScore)
+    //         scoreDiv.innerText = totalScore;
+    //         counter++;
+    //         if (counter % 2 !== 1) {
+    //             downvote.innerText = "▼";
+    //             upvote.setAttribute("class", "hidden");
+    //             downvote.setAttribute("class", "voting-button");
+
+    //         } else {
+    //             downvote.innerText = "▽";
+    //             upvote.removeAttribute("class", "hidden");
+    //             upvote.setAttribute("class", "voting-button");
+    //         }
+    //     }
+
+    // });
 
 
 
@@ -72,12 +140,19 @@ window.addEventListener("DOMContentLoaded", async () => {
     // let responseId = responseTextDiv.id;
 
     const voteDivRes = document.querySelectorAll(".response-voting");
+
+    let votedRes = false;
+
+    
+
     let counterRes = 1;
 
     
     voteDivRes.forEach(voteDiv => {
         voteDiv.addEventListener('click', async (event) => {
             if (event.target.id.includes("upvote")) {
+                let clickedElement = event.target;
+
                 let temp = event.target.id.split('W')[1];
                 let responseId = Number(temp);
                 const body = { scoreRes: 1, responseId };

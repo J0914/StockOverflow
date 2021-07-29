@@ -88,6 +88,14 @@
     padding-bottom: 15px;
 }
 
+.social-logo:hover {
+    filter: brightness(80%);
+}
+
 .team-box {
     margin-bottom: 40px;
+}
+
+.footer-spacer {
+    height: 50px;
 }
