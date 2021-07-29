@@ -8,9 +8,19 @@ block content
         h1(id=question.id class='questiontitle')= question.questionTitle
         div(class='side-to-side')
           div(id='voting-div' class='question-voting')
-            button(id='upvote-button' class='voting-button') △
+            if userScore==1
+              button(id='upvote-button' class='voting-button') ▲
+            if userScore==0
+              button(id='upvote-button' class='voting-button') △
+            if userScore==-1
+              button(id='upvote-button' class='voting-button hidden') △
             h2(id='totalScore' class='votes')= totalScore
-            button(id='downvote-button' class='voting-button') ▽
+            if userScore==-1
+              button(id='downvote-button' class='voting-button') ▼
+            if userScore==0
+              button(id='downvote-button' class='voting-button') ▽
+              if userScore==1
+              button(id='downvote-button' class='voting-button hidden') ▽
           div(class='question-text')= question.questionText
         i(class='question-author')= question.User.userName
       div(class='question')

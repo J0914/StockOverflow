@@ -66,12 +66,22 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
     });
     const newResponse = await db.Response.build();
     const questionVotes = await db.QuestionVote.findAll({ where: { questionId: question.id } });
+    
+    let userId = req.session.auth.userId
+    let userScore = 0;
+    questionVotes.forEach(vote => {
+        if (vote.userId === userId) {
+            userScore = vote.score;
+        }
+    })
+
+
     let totalScore = 0;
     if (questionVotes.length > 0) {
         totalScore = questionVotes[0].dataValues.score;
     }
 
-    res.render('question-thread', { csrfToken: req.csrfToken(), allResponses, question, questionId, totalScore, response: newResponse })
+    res.render('question-thread', { csrfToken: req.csrfToken(), allResponses, question, questionId, totalScore, response: newResponse, userScore })
 }))
 
 const questionValidators = [
@@ -149,6 +159,8 @@ router.post('/ask', csrfProtection, questionValidators, asyncHandler(async (req,
 
 
 router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
+    
+
     const questionId = Number(req.params.id);
     //console.log(req.body.responseId)
     const responseId = req.body.responseId;
@@ -163,6 +175,7 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
         }
         let voteScore = req.body.scoreRes;
         const userId = req.session.auth.userId;
+        //line 169 is votes the current user has made; need to check this to prevent multiple voting
         const responseVotes = await db.ResponseVote.findAll({ where: { userId } });
 
         if (userId) {
@@ -198,8 +211,10 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
             let current = allScores[i];
             totalScore += current.dataValues.score;
         }
+        
         let voteScore = req.body.score;
         const userId = req.session.auth.userId;
+        //this can probably get optimized
         const questionVotes = await db.QuestionVote.findAll({ where: { userId } });
 
         if (userId) {
@@ -215,9 +230,10 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
             }
             if (!hasVoted) {
                 totalScore += voteScore;
-                await db.QuestionVote.create({ userId, questionId, voteScore });
+                await db.QuestionVote.create({ userId, questionId, score: voteScore });
                 console.log('vote score', voteScore)
             } else {
+                totalScore -= voteScore;
                 let currentVote = await db.QuestionVote.findOne({
                     where: { userId, questionId }
                 })
