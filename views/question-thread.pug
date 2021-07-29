@@ -19,7 +19,7 @@ block content
               button(id='downvote-button' class='voting-button') ▼
             if userScore==0
               button(id='downvote-button' class='voting-button') ▽
-              if userScore==1
+            if userScore==1
               button(id='downvote-button' class='voting-button hidden') ▽
           div(class='question-text')= question.questionText
         i(class='question-author')= question.User.userName

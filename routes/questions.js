@@ -69,6 +69,9 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
     
     let userId = req.session.auth.userId
     let userScore = 0;
+
+    console.log("User Score ==========>", userScore, "<==============")
+
     questionVotes.forEach(vote => {
         if (vote.userId === userId) {
             userScore = vote.score;
@@ -78,8 +81,12 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
 
     let totalScore = 0;
     if (questionVotes.length > 0) {
-        totalScore = questionVotes[0].dataValues.score;
+        questionVotes.forEach(vote => {
+            totalScore += vote.dataValues.score
+        })
     }
+
+    console.log("totalScore ~~~~~~~~~~~~~~~~~~~~~~>", totalScore, "<~~~~~~~~~~~~~~~~~~~~~~")
 
     res.render('question-thread', { csrfToken: req.csrfToken(), allResponses, question, questionId, totalScore, response: newResponse, userScore })
 }))
@@ -228,7 +235,7 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
                     }
                 });
             }
-            if (!hasVoted) {
+            if (hasVoted === false) {
                 totalScore += voteScore;
                 await db.QuestionVote.create({ userId, questionId, score: voteScore });
                 console.log('vote score', voteScore)
