@@ -30,7 +30,7 @@ block content
               div(id="vote-listener" class='side-to-side login-form')
                 div(id='voting-div' class='response-voting')
                   button(id=`upvote-response-buttonW${response.id}` class='voting-response-button upvote-resbutton') △
-                  h2(id=`totalRespScore${response.id}` class=`respVotes`)= totalScore 
+                  h2(id=`totalRespScore${response.id}` class=`respVotes`)= response.dataValues.resTotalScore 
                   button(id=`downvote-response-buttonW${response.id}` class='voting-response-button downvote-resbutton') ▽
                 div(class='response-container')
                   div(class='response-content')

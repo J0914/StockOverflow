@@ -60,12 +60,30 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
         where: {
             questionId: questionId
         },
-        include: {
-            model: db.User
-        }
+        include: [
+            {model: db.User}, 
+            {model: db.ResponseVote}
+        ]
     });
     const newResponse = await db.Response.build();
     const questionVotes = await db.QuestionVote.findAll({ where: { questionId: question.id } });
+    
+    //allResponses has an array of all the responses for this question;
+    //  Each response includes all the votes for it
+
+    allResponses.forEach(response => {
+        let voteTally = 0;
+
+        response.dataValues.ResponseVotes.forEach(vote => {
+            voteTally += vote.dataValues.score;
+        })
+
+        response.dataValues.resTotalScore = voteTally;
+    })
+
+
+    console.log("Check the ResponseVotes..............==>", allResponses[0].dataValues.resTotalScore)
+
     
     let userId = req.session.auth.userId
     let userScore = 0;
@@ -253,6 +271,16 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
         await res.json({ totalScore });
     }
 }));
+
+
+router.post('/:id(\\d+)/response/:responseId(\\d+)/vote', asyncHandler(async (req, res, next) => {
+
+    const responseId = parseInt(req.params.responseId, 10);
+
+    console.log(responseId)
+
+
+}))
 
 
 router.post('/:id(\\d+)/response/submit', csrfProtection, asyncHandler(async (req, res) => {

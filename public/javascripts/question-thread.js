@@ -46,6 +46,32 @@ window.addEventListener("DOMContentLoaded", async () => {
             }
         }
 
+        if (event.target.id === "downvote-button") {
+            const body = { score: -1 };
+
+            const response = await fetch(`${questionId}/vote`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json',
+                },
+                body: JSON.stringify(body)
+            });
+            const { totalScore } = await response.json();
+            //console.log(totalScore)
+            scoreDiv.innerText = totalScore;
+
+            voted = !voted;
+            console.log("did I vote now?", voted)
+
+            if(voted === true) {
+                downvote.innerHTML = "▼";
+                upvote.classList.add("hidden");
+                
+            } else {
+                downvote.innerHTML = "▽";
+                upvote.classList.remove("hidden")
+            }
+        }
 
     })
 
@@ -114,12 +140,19 @@ window.addEventListener("DOMContentLoaded", async () => {
     // let responseId = responseTextDiv.id;
 
     const voteDivRes = document.querySelectorAll(".response-voting");
+
+    let votedRes = false;
+
+    
+
     let counterRes = 1;
 
     
     voteDivRes.forEach(voteDiv => {
         voteDiv.addEventListener('click', async (event) => {
             if (event.target.id.includes("upvote")) {
+                let clickedElement = event.target;
+
                 let temp = event.target.id.split('W')[1];
                 let responseId = Number(temp);
                 const body = { scoreRes: 1, responseId };
