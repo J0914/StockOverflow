@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const questionTitleDiv = document.querySelector('.questiontitle');
     const questionId = questionTitleDiv.id;
     const voteDiv = document.getElementById("voting-div");
-    let counter = 1;
+    
 
     let voted = false;
 
@@ -130,7 +130,19 @@ window.addEventListener("DOMContentLoaded", async () => {
     // });
 
 
+    let responseVoteObject = {}
 
+    const userResVoteDivs = document.querySelectorAll('.hidden-vote')
+
+    userResVoteDivs.forEach(div => {
+        let responseId = div.id.split("Q")[1]
+
+        console.log("responseId", responseId)
+
+        responseVoteObject[responseId] = div.innerHTML;
+    })
+
+    console.log(responseVoteObject, "<=====#########################")
 
     const upvoteRes = document.querySelectorAll(".upvote-resbutton");
     const downvoteRes = document.querySelectorAll(".downvote-resbutton");

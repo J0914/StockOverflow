@@ -29,6 +29,7 @@ block content
             each response in allResponses
               div(id="vote-listener" class='side-to-side login-form')
                 div(id='voting-div' class='response-voting')
+                  div(id=`resvoteQ${response.id}` class='hidden-vote')= response.dataValues.userVoteInfo.userResVoteScore
                   button(id=`upvote-response-buttonW${response.id}` class='voting-response-button upvote-resbutton') △
                   h2(id=`totalRespScore${response.id}` class=`respVotes`)= response.dataValues.resTotalScore 
                   button(id=`downvote-response-buttonW${response.id}` class='voting-response-button downvote-resbutton') ▽

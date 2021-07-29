@@ -92,7 +92,11 @@ h3 {
     margin-top: 20px;
 }
 .hidden {
-  display: none;
+    display: none;
+}
+
+.hidden-vote {
+    display: none;
 }
 
 .side-to-side {

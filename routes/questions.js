@@ -53,6 +53,7 @@ router.get('/', asyncHandler(async (req, res) => {
 }))
 
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //does this need a csrfToken for the new response form...?
+    const userId = req.session.auth.userId
     const questionId = parseInt(req.params.id, 10);
     const question = await db.Question.findByPk(questionId, { include: 'User' });
     const allResponses = await db.Response.findAll({
@@ -73,22 +74,29 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
 
     allResponses.forEach(response => {
         let voteTally = 0;
-
+        let userResVoted = false;
+        let userResVoteScore = 0
         response.dataValues.ResponseVotes.forEach(vote => {
             voteTally += vote.dataValues.score;
+
+            if (vote.dataValues.userId === userId) {
+                userVoted = true;
+                userResVoteScore = vote.dataValues.score;
+            }
         })
 
         response.dataValues.resTotalScore = voteTally;
+        response.dataValues.userVoteInfo = {userResVoted, userResVoteScore}
     })
 
 
-    console.log("Check the ResponseVotes..............==>", allResponses[0].dataValues.resTotalScore)
+    console.log("Check the ResponseVotes..............==>", allResponses[0].dataValues.ResponseVotes)
 
     
-    let userId = req.session.auth.userId
+    
     let userScore = 0;
 
-    console.log("User Score ==========>", userScore, "<==============")
+    // console.log("User Score ==========>", userScore, "<==============")
 
     questionVotes.forEach(vote => {
         if (vote.userId === userId) {
