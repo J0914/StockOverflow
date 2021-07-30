@@ -79,7 +79,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
         response.dataValues.ResponseVotes.forEach(vote => {
             voteTally += vote.dataValues.score;
 
-            if (vote.dataValues.userId === userId) {
+            if (userId && vote.dataValues.userId === userId) {
                 userVoted = true;
                 userResVoteScore = vote.dataValues.score;
             }
@@ -90,19 +90,20 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
     })
 
 
-    console.log("Check the ResponseVotes..............==>", allResponses[0].dataValues.ResponseVotes)
+    // console.log("Check the ResponseVotes..............==>", allResponses[0].dataValues.ResponseVotes)
 
     
     
     let userScore = 0;
 
     // console.log("User Score ==========>", userScore, "<==============")
-
-    questionVotes.forEach(vote => {
-        if (vote.userId === userId) {
-            userScore = vote.score;
-        }
-    })
+    if (userId) {
+        questionVotes.forEach(vote => {
+            if (vote.userId === userId) {
+                userScore = vote.score;
+            }
+        })
+    }
 
 
     let totalScore = 0;
@@ -112,7 +113,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
         })
     }
 
-    console.log("totalScore ~~~~~~~~~~~~~~~~~~~~~~>", totalScore, "<~~~~~~~~~~~~~~~~~~~~~~")
+    // console.log("totalScore ~~~~~~~~~~~~~~~~~~~~~~>", totalScore, "<~~~~~~~~~~~~~~~~~~~~~~")
 
     res.render('question-thread', { csrfToken: req.csrfToken(), allResponses, question, questionId, totalScore, response: newResponse, userScore })
 }))
