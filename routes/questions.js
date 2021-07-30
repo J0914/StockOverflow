@@ -53,6 +53,11 @@ router.get('/', asyncHandler(async (req, res) => {
 }))
 
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //does this need a csrfToken for the new response form...?
+    let userId;
+    if (req.session.auth) {
+        userId = req.session.auth.userId
+    }
+    
     const questionId = parseInt(req.params.id, 10);
     const question = await db.Question.findByPk(questionId, { include: 'User' });
     const allResponses = await db.Response.findAll({
@@ -73,28 +78,36 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
 
     allResponses.forEach(response => {
         let voteTally = 0;
-
+        let userResVoted = false;
+        let userResVoteScore = 0
         response.dataValues.ResponseVotes.forEach(vote => {
             voteTally += vote.dataValues.score;
+
+            if (userId && vote.dataValues.userId === userId) {
+                userVoted = true;
+                userResVoteScore = vote.dataValues.score;
+            }
         })
 
         response.dataValues.resTotalScore = voteTally;
+        response.dataValues.userVoteInfo = {userResVoted, userResVoteScore}
     })
 
 
-    console.log("Check the ResponseVotes..............==>", allResponses[0].dataValues.resTotalScore)
+    // console.log("Check the ResponseVotes..............==>", allResponses[0].dataValues.ResponseVotes)
 
     
-    let userId = req.session.auth.userId
+    
     let userScore = 0;
 
-    console.log("User Score ==========>", userScore, "<==============")
-
-    questionVotes.forEach(vote => {
-        if (vote.userId === userId) {
-            userScore = vote.score;
-        }
-    })
+    // console.log("User Score ==========>", userScore, "<==============")
+    if (userId) {
+        questionVotes.forEach(vote => {
+            if (vote.userId === userId) {
+                userScore = vote.score;
+            }
+        })
+    }
 
 
     let totalScore = 0;
@@ -104,7 +117,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => { //do
         })
     }
 
-    console.log("totalScore ~~~~~~~~~~~~~~~~~~~~~~>", totalScore, "<~~~~~~~~~~~~~~~~~~~~~~")
+    // console.log("totalScore ~~~~~~~~~~~~~~~~~~~~~~>", totalScore, "<~~~~~~~~~~~~~~~~~~~~~~")
 
     res.render('question-thread', { csrfToken: req.csrfToken(), allResponses, question, questionId, totalScore, response: newResponse, userScore })
 }))
@@ -187,104 +200,92 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
     
 
     const questionId = Number(req.params.id);
-    //console.log(req.body.responseId)
+    
     const responseId = req.body.responseId;
-    if (responseId !== undefined) {
-        //console.log('here')
-        //console.log(responseId)
-        let allScores = await db.ResponseVote.findAll({ where: { responseId } });
-        let totalResScore = 0;
-        for (let i = 0; i < allScores.length; i++) {
-            let current = allScores[i];
-            totalResScore += current.dataValues.score;
-        }
-        let voteScore = req.body.scoreRes;
-        const userId = req.session.auth.userId;
-        //line 169 is votes the current user has made; need to check this to prevent multiple voting
-        const responseVotes = await db.ResponseVote.findAll({ where: { userId } });
+    
+    let allScores = await db.QuestionVote.findAll({ where: { questionId } });
+    let totalScore = 0;
+    for (let i = 0; i < allScores.length; i++) {
+        let current = allScores[i];
+        totalScore += current.dataValues.score;
+    }
+    
+    let voteScore = req.body.score;
+    const userId = req.session.auth.userId;
+    //this can probably get optimized
+    const questionVotes = await db.QuestionVote.findAll({ where: { userId } });
 
-        if (userId) {
-            let hasVoted = false;
-            //check if has voted
-            if (responseVotes.length > 0) {
-                responseVotes.forEach(vote => {
-                    if (vote.dataValues.responseId === responseId) {
-                        hasVoted = true;
-                        //!!notify user that they can not vote more than once
-                    }
-                });
-            }
-            if (!hasVoted) {
-                totalResScore += voteScore;
-                await db.ResponseVote.create({ userId, responseId, voteScore });
-                console.log('vote score', voteScore)
-            } else {
-                let currentVote = await db.ResponseVote.findOne({
-                    where: { userId, responseId }
-                })
-                await currentVote.destroy();
-            }
-        } else {
-            console.error('Please log in!')
+    if (userId) {
+        let hasVoted = false;
+        //check if has voted
+        if (questionVotes.length > 0) {
+            questionVotes.forEach(vote => {
+                if (vote.dataValues.questionId === questionId) {
+                    hasVoted = true;
+                    //!!notify user that they can not vote more than once
+                }
+            });
         }
-        console.log(totalResScore)
-        await res.json({ totalResScore })
+        if (hasVoted === false) {
+            totalScore += voteScore;
+            await db.QuestionVote.create({ userId, questionId, score: voteScore });
+            console.log('vote score', voteScore)
+        } else {
+            totalScore -= voteScore;
+            let currentVote = await db.QuestionVote.findOne({
+                where: { userId, questionId }
+            })
+            await currentVote.destroy();
+        }
     } else {
-        let allScores = await db.QuestionVote.findAll({ where: { questionId } });
-        let totalScore = 0;
-        for (let i = 0; i < allScores.length; i++) {
-            let current = allScores[i];
-            totalScore += current.dataValues.score;
-        }
-        
-        let voteScore = req.body.score;
-        const userId = req.session.auth.userId;
-        //this can probably get optimized
-        const questionVotes = await db.QuestionVote.findAll({ where: { userId } });
-
-        if (userId) {
-            let hasVoted = false;
-            //check if has voted
-            if (questionVotes.length > 0) {
-                questionVotes.forEach(vote => {
-                    if (vote.dataValues.questionId === questionId) {
-                        hasVoted = true;
-                        //!!notify user that they can not vote more than once
-                    }
-                });
-            }
-            if (hasVoted === false) {
-                totalScore += voteScore;
-                await db.QuestionVote.create({ userId, questionId, score: voteScore });
-                console.log('vote score', voteScore)
-            } else {
-                totalScore -= voteScore;
-                let currentVote = await db.QuestionVote.findOne({
-                    where: { userId, questionId }
-                })
-                await currentVote.destroy();
-            }
-        } else {
-            console.error('Please log in!')
-        }
+        console.error('Please log in!')
+    }
         //console.log(totalScore);
         await res.json({ totalScore });
     }
-}));
+));
 
 
-router.post('/:id(\\d+)/response/:responseId(\\d+)/vote', asyncHandler(async (req, res, next) => {
+router.post('/:id(\\d+)/responses/:responseId(\\d+)/vote', asyncHandler(async (req, res, next) => {
 
     const responseId = parseInt(req.params.responseId, 10);
+    const userId = req.session.auth.userId;
 
-    console.log(responseId)
+    const {scoreRes, userVoted} = req.body;
 
+    
 
+    console.log(responseId, scoreRes, userVoted)
+
+    
+    if (userVoted === true) {
+        //delete vote
+        let currentVote = await db.ResponseVote.findOne({
+            where: { userId, responseId }
+        }) 
+
+        await currentVote.destroy();
+        
+    } else {
+        //create vote
+        await db.ResponseVote.create({ userId, responseId, score: scoreRes })
+    }
+    
+    
+    const responseVotesForThisResponse = await db.ResponseVote.findAll({ where: {responseId}})
+
+    let totalScoreOfResponse = 0;
+
+    responseVotesForThisResponse.forEach(vote => {
+        totalScoreOfResponse += vote.dataValues.score;
+    })
+
+    await res.json({ totalResScore: totalScoreOfResponse });
 }))
 
 
 router.post('/:id(\\d+)/response/submit', csrfProtection, asyncHandler(async (req, res) => {
-    console.log('here');
+    
     const { responseText } = req.body;
 
     const questionId = req.params.id;
@@ -294,7 +295,7 @@ router.post('/:id(\\d+)/response/submit', csrfProtection, asyncHandler(async (re
 
 
 
-        console.log('QuestionID', questionId)
+        // console.log('QuestionID', questionId)
         await db.Response.create({ responseText, userId, questionId });
 
         res.redirect(`/questions/${questionId}`);

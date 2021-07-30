@@ -52,11 +52,15 @@ h5{
 
 .question-ask-form-label {
     font-weight: bold;
-
+    
 }
 
 .question-ask-form-label p {
     font-size: 0.8rem;
+}
+
+.question-ask-form-field {
+    margin-bottom: 10px;
 }
 
 .question-ask-submit {
@@ -122,4 +126,5 @@ h5{
 
 #question-ask-textarea {
     width: 100%;
+    margin-bottom: 10px;
 }

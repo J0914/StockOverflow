@@ -7,35 +7,56 @@ block content
       div(class='question login-form')
         h1(id=question.id class='questiontitle')= question.questionTitle
         div(class='side-to-side')
-          div(id='voting-div' class='question-voting')
-            if userScore==1
-              button(id='upvote-button' class='voting-button') ▲
-            if userScore==0
-              button(id='upvote-button' class='voting-button') △
-            if userScore==-1
-              button(id='upvote-button' class='voting-button hidden') △
-            h2(id='totalScore' class='votes')= totalScore
-            if userScore==-1
-              button(id='downvote-button' class='voting-button') ▼
-            if userScore==0
-              button(id='downvote-button' class='voting-button') ▽
-            if userScore==1
-              button(id='downvote-button' class='voting-button hidden') ▽
+          if !locals.authenticated
+            div(class='no-vote-message hidden') Users must be logged in to vote
+            div(id='voting-div' class='question-voting no-user')
+              button(id='upvote-button' class='voting-button-disabled' disabled) ▲
+              h2(id='totalScore' class='votes')= totalScore
+              button(id='downvote-button' class='voting-button-disabled' disabled) ▼
+          else
+            div(id='voting-div' class='question-voting')
+              if userScore==1
+                button(id='upvote-button' class='voting-button') ▲
+              if userScore==0
+                button(id='upvote-button' class='voting-button') △
+              if userScore==-1
+                button(id='upvote-button' class='voting-button hidden') △
+              h2(id='totalScore' class='votes')= totalScore
+              if userScore==-1
+                button(id='downvote-button' class='voting-button') ▼
+              if userScore==0
+                button(id='downvote-button' class='voting-button') ▽
+              if userScore==1
+                button(id='downvote-button' class='voting-button hidden') ▽
           div(class='question-text')= question.questionText
         i(class='question-author')= question.User.userName
       div(class='question')
         h3= `${allResponses.length} Responses`
           div(class='responses')
             each response in allResponses
-              div(id="vote-listener" class='side-to-side login-form')
-                div(id='voting-div' class='response-voting')
-                  button(id=`upvote-response-buttonW${response.id}` class='voting-response-button upvote-resbutton') △
-                  h2(id=`totalRespScore${response.id}` class=`respVotes`)= response.dataValues.resTotalScore 
-                  button(id=`downvote-response-buttonW${response.id}` class='voting-response-button downvote-resbutton') ▽
-                div(class='response-container')
-                  div(class='response-content')
-                    div(class='response-text' id=`${response.id}`)= response.responseText
-                    i(class='response-author')= response.User.userName
+              if !locals.authenticated
+                div(id="vote-listener" class='side-to-side login-form')
+                  div(id=`hidden-message-${response.id}` class='no-vote-res-message hidden') Users must be logged in to vote
+                  div(id=`voting-divQ${response.id}` class='response-voting no-user-res')
+                    div(id=`resvoteQ${response.id}` class='hidden-vote')= response.dataValues.userVoteInfo.userResVoteScore
+                    button(id=`disabled-upvote-response-buttonW${response.id}` class='voting-response-button upvote-resbutton disabled' disabled) ▲
+                    h2(id=`totalRespScore${response.id}` class=`respVotes`)= response.dataValues.resTotalScore 
+                    button(id=`disabled-downvote-response-buttonW${response.id}` class='voting-response-button downvote-resbutton disabled' disabled) ▼
+                  div(class='response-container')
+                    div(class='response-content')
+                      div(class='response-text' id=`${response.id}`)= response.responseText
+                      i(class='response-author')= response.User.userName
+              else
+                div(id="vote-listener" class='side-to-side login-form')
+                  div(id='voting-div' class='response-voting')
+                    div(id=`resvoteQ${response.id}` class='hidden-vote')= response.dataValues.userVoteInfo.userResVoteScore
+                    button(id=`upvote-response-buttonW${response.id}` class='voting-response-button upvote-resbutton') △
+                    h2(id=`totalRespScore${response.id}` class=`respVotes`)= response.dataValues.resTotalScore 
+                    button(id=`downvote-response-buttonW${response.id}` class='voting-response-button downvote-resbutton') ▽
+                  div(class='response-container')
+                    div(class='response-content')
+                      div(class='response-text' id=`${response.id}`)= response.responseText
+                      i(class='response-author')= response.User.userName
       div(class='submit-response-container login-form')
         h2 Your Response
         form(action=`/questions/${questionId}/response/submit` method="post")
