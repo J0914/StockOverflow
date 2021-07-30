@@ -200,49 +200,9 @@ router.post('/:id(\\d+)/vote', asyncHandler(async (req, res, next) => {
     
 
     const questionId = Number(req.params.id);
-    //console.log(req.body.responseId)
+    
     const responseId = req.body.responseId;
-    // if (responseId !== undefined) {
-    //     //console.log('here')
-    //     //console.log(responseId)
-    //     let allScores = await db.ResponseVote.findAll({ where: { responseId } });
-    //     let totalResScore = 0;
-    //     for (let i = 0; i < allScores.length; i++) {
-    //         let current = allScores[i];
-    //         totalResScore += current.dataValues.score;
-    //     }
-    //     let voteScore = req.body.scoreRes;
-    //     const userId = req.session.auth.userId;
-    //     //line 169 is votes the current user has made; need to check this to prevent multiple voting
-    //     const responseVotes = await db.ResponseVote.findAll({ where: { userId } });
-
-    //     if (userId) {
-    //         let hasVoted = false;
-    //         //check if has voted
-    //         if (responseVotes.length > 0) {
-    //             responseVotes.forEach(vote => {
-    //                 if (vote.dataValues.responseId === responseId) {
-    //                     hasVoted = true;
-    //                     //!!notify user that they can not vote more than once
-    //                 }
-    //             });
-    //         }
-    //         if (!hasVoted) {
-    //             totalResScore += voteScore;
-    //             await db.ResponseVote.create({ userId, responseId, voteScore });
-    //             console.log('vote score', voteScore)
-    //         } else {
-    //             let currentVote = await db.ResponseVote.findOne({
-    //                 where: { userId, responseId }
-    //             })
-    //             await currentVote.destroy();
-    //         }
-    //     } else {
-    //         console.error('Please log in!')
-    //     }
-    //     console.log(totalResScore)
-    //     await res.json({ totalResScore })
-    // } else {
+    
     let allScores = await db.QuestionVote.findAll({ where: { questionId } });
     let totalScore = 0;
     for (let i = 0; i < allScores.length; i++) {

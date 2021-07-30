@@ -1,4 +1,6 @@
 window.addEventListener("DOMContentLoaded", async () => {
+    
+    //Question voting
     const upvote = document.getElementById("upvote-button");
     const downvote = document.getElementById("downvote-button");
     const scoreDiv = document.getElementById("totalScore");
@@ -109,7 +111,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             responseVoteObject[responseId].userHasVotedForThis = true;
         }
 
-        if (responseVoteObject[responseId].usersVoteScore === 0) {
+        if (resUpvoteButton && resDownvoteButton && responseVoteObject[responseId].usersVoteScore === 0) {
             resUpvoteButton.innerText = "△";
             resUpvoteButton.classList.remove("hidden");
             resDownvoteButton.innerText = "▽";
@@ -117,16 +119,16 @@ window.addEventListener("DOMContentLoaded", async () => {
             responseVoteObject[responseId].userHasVotedForThis = false;
         }
 
-        if (responseVoteObject[responseId].usersVoteScore === -1) {
+        if (resUpvoteButton && resDownvoteButton && responseVoteObject[responseId].usersVoteScore === -1) {
             resUpvoteButton.classList.add("hidden")
             responseVoteObject[responseId].userHasVotedForThis = true;
         }
 
-        if (responseVoteObject[responseId].usersVoteScore === -1) {
+        if (resUpvoteButton && resDownvoteButton && responseVoteObject[responseId].usersVoteScore === -1) {
             resDownvoteButton.innerText = "▼"
         }
 
-        if (responseVoteObject[responseId].usersVoteScore === 1) {
+        if (resUpvoteButton && resDownvoteButton && responseVoteObject[responseId].usersVoteScore === 1) {
             resDownvoteButton.classList.add("hidden")
         }
 
@@ -217,5 +219,39 @@ window.addEventListener("DOMContentLoaded", async () => {
         })
     })
 
-   
+    //Not logged in -- Question votes
+    let hiddenMessage = document.querySelector(".no-vote-message");
+
+    let noUserVotingDiv = document.querySelector(".no-user")
+;
+    
+    noUserVotingDiv && noUserVotingDiv.addEventListener('mouseenter', e => {
+        hiddenMessage.classList.remove('hidden')
+    })
+
+    noUserVotingDiv && noUserVotingDiv.addEventListener('mouseleave', e => {
+        hiddenMessage.classList.add("hidden")
+    })
+    
+
+    //Not logged in -- Response votes
+    let noUserResVotingDivs = document.querySelectorAll(".no-user-res")
+
+    noUserResVotingDivs.forEach(div => {
+        div.addEventListener('mouseenter', e => {
+            let responseId = div.id.split("Q")[1];
+
+            let resHiddenMessage = document.querySelector(`#hidden-message-${responseId}`);
+            resHiddenMessage.classList.remove('hidden');
+        })
+
+        div.addEventListener('mouseleave', e => {
+            let responseId = div.id.split("Q")[1];
+
+            let resHiddenMessage = document.querySelector(`#hidden-message-${responseId}`);
+            resHiddenMessage.classList.add('hidden');
+        })
+
+    })
+
 });
