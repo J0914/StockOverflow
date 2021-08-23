@@ -144,30 +144,36 @@ The stock market influences many people's daily lives and  cryptocurrency is exp
 
 ### The amazing developers that made this site possible!
 
-<a href="https://github.com/a-loeffler">
+<a target="_blank" href="https://github.com/a-loeffler">
     <img src="./public/readmeImages/githubLogo2.png" alt="github" width="25" height="25">
+</a> 
+<a target="_blank" href="https://www.linkedin.com/in/andrew-loeffler-fullstack-dev/">
+<img src="./public/readmeImages/linkedinLogo2.png" alt="github" width="25" height="25">
 </a> Andrew Loeffler
 <br>
 
-<a href="https://github.com/J0914">
+<a target="_blank" href="https://github.com/J0914">
     <img src="./public/readmeImages/githubLogo2.png" alt="github" width="25" height="25">
 </a>
-<a href="https://www.linkedin.com/in/jordyn-sechrist-87710b207">
+<a target="_blank" href="https://www.linkedin.com/in/jordyn-sechrist-87710b207">
 <img src="./public/readmeImages/linkedinLogo2.png" alt="github" width="25" height="25">
 </a> Jordyn Sechrist
 <br>
 
 
-<a href="https://github.com/jimsonm">
+<a target="_blank" href="https://github.com/jimsonm">
     <img src="./public/readmeImages/githubLogo2.png" alt="github" width="25" height="25">
+</a> 
+<a target="_blank" href="https://www.linkedin.com/in/jimson-ma-462197213/">
+<img src="./public/readmeImages/linkedinLogo2.png" alt="github" width="25" height="25">
 </a> Jimson Ma
 <br>
 
 
-<a href="https://github.com/victoriatarane">
+<a target="_blank" href="https://github.com/victoriatarane">
     <img src="./public/readmeImages/githubLogo2.png" alt="github" width="25" height="25">
 </a>
-<a href="https://www.linkedin.com/in/victoria-tarane-54a86b5b">
+<a target="_blank" href="https://www.linkedin.com/in/victoria-tarane-54a86b5b">
 <img src="./public/readmeImages/linkedinLogo2.png" alt="github" width="25" height="25">
 </a> Viktorija Tarane
 
