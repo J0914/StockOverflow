@@ -111,6 +111,10 @@ const loginValidators = [
 ]
 
 router.get('/login', csrfProtection, asyncHandler(async(req, res) => {
+  if(req.session.auth) {
+    return res.redirect('/');
+  }
+
   res.render('users-login', {
     title: 'Login',
     csrfToken: req.csrfToken()
